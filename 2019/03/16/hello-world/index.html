@@ -431,7 +431,8 @@
 <p>等待完成，再输入命令 cnpm install hexo –save<br><img src="https://github.com/Greypotato/img/blob/master/hexo03.png" alt="Image text"></p>
 <p>至此Hexo安装完成，使用查看版本命令 hexo -v 检查是否正常安装。<img src="https://github.com/Greypotato/img/blob/master/hexo04.png" alt="Image text"></p>
 <h3 id="六、发布网站"><a href="#六、发布网站" class="headerlink" title="六、发布网站"></a>六、发布网站</h3><p>1、本地启动<br>创建一个新文件夹（我的是在E盘创建的Blog），进入该文件夹，右键Git Bash Here，输入 hexo init 命令。<br>接下来输入 hexo s -g 命令启动，启动后浏览器访问localhost:4000查看博客效果。</p>
-<p>2、部署到Github<br>本地成功后下面就要部署到Git了，打开_config.yml进行配置，如下图，复制你的仓库地址给repo参数(上面有讲怎么复制）。</p>
+<p>2、部署到Github<br>本地成功后下面就要部署到Git了，打开_config.yml进行配置，如下图，复制你的仓库地址给repo参数<br><img src="https://github.com/Greypotato/img/blob/master/blog01.png" alt="Image text"><br>在Git命令窗口输入 npm install hexo-deployer-git –save 安装hexo-deployer-git自动部署发布工具，等待安装完成，输入 （hexo clean）   （hexo g）   （hexo d） 命令发布到Github，这里注意第一次发布的话会需要输入你的Github账号跟密码，等待出现下图的信息就说明发布成功了，在浏览器输入yourname.github.io就可以看到你的博客了。<img src="https://github.com/Greypotato/img/blob/master/blog02.png" alt="Image text"></p>
+<p>###七、更改主题<br>部署完毕后，可以根据自己的喜好更改自己的主题在hexo的官网中有主题选项然后进行配置更改找到自己喜欢的网站主题。完成配置就好了。</p>
 
             </div>
             <hr>
