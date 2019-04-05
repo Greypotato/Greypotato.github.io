@@ -432,7 +432,14 @@
 <p>至此Hexo安装完成，使用查看版本命令 hexo -v 检查是否正常安装。<img src="/2019/03/16/hello-world/hexo04.png" alt="Image"></p>
 <h3 id="六、发布网站"><a href="#六、发布网站" class="headerlink" title="六、发布网站"></a>六、发布网站</h3><p>1、本地启动<br>创建一个新文件夹（我的是在E盘创建的Blog），进入该文件夹，右键Git Bash Here，输入 hexo init 命令。<br>接下来输入 hexo s -g 命令启动，启动后浏览器访问localhost:4000查看博客效果。</p>
 <p>2、部署到Github<br>本地成功后下面就要部署到Git了，打开_config.yml进行配置，如下图，复制你的仓库地址给repo参数<br><img src="/2019/03/16/hello-world/blog01.png" alt="Image"><br>在Git命令窗口输入 npm install hexo-deployer-git –save 安装hexo-deployer-git自动部署发布工具，等待安装完成，输入 （hexo clean）   （hexo g）   （hexo d） 命令发布到Github，这里注意第一次发布的话会需要输入你的Github账号跟密码，等待出现下图的信息就说明发布成功了，在浏览器输入yourname.github.io就可以看到你的博客了。<img src="/2019/03/16/hello-world/blog02.png" alt="Image"></p>
-<p>###七、更改主题<br>部署完毕后，可以根据自己的喜好更改自己的主题在hexo的官网中有主题选项然后进行配置更改找到自己喜欢的网站主题。完成配置就好了。</p>
+<h3 id="七、更改主题"><a href="#七、更改主题" class="headerlink" title="七、更改主题"></a>七、更改主题</h3><p>部署完毕后，可以根据自己的喜好更改自己的主题在hexo的官网中有主题选项然后进行配置更改找到自己喜欢的网站主题。完成配置就好了。</p>
+<h3 id="对于上传图片的问题解决"><a href="#对于上传图片的问题解决" class="headerlink" title="对于上传图片的问题解决"></a>对于上传图片的问题解决</h3><p> 前一段搭建好的个人博客 图片怎么传也传不上去，把图片放在github的库中也没有操作好 ，甚至找了一个破解版的MarkdownPad 2 插入图片也没有成功，对此  差点自闭。 后来在学长的指导下得出了如何简单的上传图片。放下如下</p>
+<p> 1、cd到博客根目录下 查看_config.yml文件<br>    查找 post_asset_folder<br>    字段确定post_asset_folder<br>    设置为true -&gt; post_asset_folder:true</p>
+<p>2、当你设置 post_asset_folder  参数后，在建立文件时，Hexo 会自动建立一个与文章同名的文件夹，你可以把与该文章相关的所有资源都放到此文件夹内，这样就可以更方便的使用资源。</p>
+<p>3、到博客的根目录下执行 npm install <a href="https://github.com/CodeFalling/hexo-asset-image" target="_blank" rel="noopener">https://github.com/CodeFalling/hexo-asset-image</a> –save 命令来进行插件的安装。</p>
+<p>4、然后创建一文章 hexo new “test” 然后查看博客的 ../source/_posts 目录下的文件，会看到存在一个test 文件夹 和 test.md 文件</p>
+<p>5、将需要显示在test.md文件中的图片放到上面命令生成的test文件夹中<br>    在test.md文件中使用 <img src="/2019/03/16/hello-world/地址" alt="随便填">命令显示文件，其中中括号的内容会是你在md文件中图片的名字，小括号中的地址的格式为 文件夹名/图片名，例如 test/test.png</p>
+<p>在此终于解决了图片上传的问题，由衷感谢学长的帮助。<br>个人博客，希望能够帮助到一些人，小白第一次发博，还请大佬轻喷。</p>
 
             </div>
             <hr>
