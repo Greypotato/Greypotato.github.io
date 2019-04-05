@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>LSB隐写</title>
+      <link href="/2019/04/05/LSB/"/>
+      <url>/2019/04/05/LSB/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>平台上自己尝试着解了一些有关于图片隐写的问题，对于LSB隐写题目的一些个人的理解，以及个人的解题思路。</p><h2 id="LSB简介"><a href="#LSB简介" class="headerlink" title="LSB简介"></a>LSB简介</h2><p>LSB，称为：最低有效位，它的英文是Least Significant Bit 。我们知道图像像素一般是由RGB三原色（即红绿蓝）组成的，每一种颜色占用8位，0x00~0xFF，即一共有256种颜色，一共包含了256的3次方的颜色，颜色太多，而人的肉眼能区分的只有其中一小部分，这导致了当我们修改RGB颜色分量种最低的二进制位的时候，我们的肉眼是区分不出来的。LSB加密是信息隐藏中最基本的方法。古人的藏头诗也算是一种隐写。<br><img src="/2019/04/05/LSB/jian.png" alt="Image text"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title></title>
       <link href="/2019/03/31/hello-world/README/"/>
       <url>/2019/03/31/hello-world/README/</url>
