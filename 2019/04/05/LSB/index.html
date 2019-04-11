@@ -404,14 +404,14 @@ LSB简介LSB，称为：最低有效位，它的英文是Least Significant Bit �
             <div id="articleContent">
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>平台上自己尝试着解了一些有关于图片隐写的问题，对于LSB隐写题目的一些学习与理解，以及个人的解题思路。</p>
 <h2 id="LSB简介"><a href="#LSB简介" class="headerlink" title="LSB简介"></a>LSB简介</h2><p>LSB，称为：最低有效位，它的英文是Least Significant Bit 。我们知道图像像素一般是由RGB三原色（即红绿蓝）组成的，每一种颜色占用8位，0x00~0xFF，即一共有256种颜色，一共包含了256的3次方的颜色，颜色太多，而人的肉眼能区分的只有其中一小部分，这导致了当我们修改RGB颜色分量种最低的二进制位的时候，我们的肉眼是区分不出来的。LSB加密是信息隐藏中最基本的方法。古人的藏头诗也算是一种隐写。</p>
-<p><img src="https://github.com/Greypotato/img/blob/master/jian.png" alt="Image"></p>
+<p><img src="/2019/04/05/LSB/jian.png" alt="Image"></p>
 <h2 id="对最低有效位的意思解析"><a href="#对最低有效位的意思解析" class="headerlink" title="对最低有效位的意思解析"></a>对最低有效位的意思解析</h2><p>png图片是一种无损压缩的位图片形格式，也只有在无损压缩或者无压缩的图片（BMP）上实现lsb隐写。如果图像是jpg图片的话，就没法使用lsb隐写了，原因是jpg图片对像数进行了有损压缩，修改的信息就可能会在压缩的过程中被破坏。而png图片虽然也有压缩，但却是无损压缩，这样修改的信息也就能得到正确的表达，不至于丢失。BMP的图片也是一样的，是没有经过压缩的。BMP图片一般是特别的大的，因为BMP把所有的像数都按原样储存，没有进行压缩。<br>png图片中的图像像数一般是由RGB三原色（红绿蓝）组成，每一种颜色占用8位，取值范围为0x00~0xFF，即有256种颜色，一共包含了256的3次方的颜色，即16777216种颜色。而人类的眼睛可以区分约1000万种不同的颜色，这就意味着人类的眼睛无法区分余下的颜色大约有6777216种。<br><img src="/2019/04/05/LSB/lj.png" alt="Image"><br>十进制的235表示的是绿色，我们修改了在二进制中的最低位，但是颜色看起来依旧没有变化。我们就可以修改最低位中的信息，实现信息的隐写。我修改最低有效位的信息的算法就叫做lsb加密算法，提取最低有效位信息的算法叫做lsb解密算法。<br><img src="/2019/04/05/LSB/lj01.png" alt="Image"><br><img src="/2019/04/05/LSB/lj02.png" alt="Image"></p>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>解题必然会有工具这里， 在这里使用一款功能很强大的lsb隐写分析工具—StegSolve图片通道查看器。使用这个工具记得首先安装JDK配置JAVA环境，然后再使用StegSolve。<br>下面是我使用的JDK以及配置好后的StegSolve图标。<br><img src="/2019/04/05/LSB/java.png" alt="Image"></p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>解题必然会有工具这里， 在这里使用一款功能很强大的lsb隐写分析工具—StegSolve图片通道查看器。使用这个工具记得首先安装JDK配置JAVA环境，然后再使用StegSolve。<br>下面是我使用的JDK以及配置好后的StegSolve图标。<br><img src="/2019/04/05/LSB/java.png" alt="Inage"></p>
 <h2 id="使用工具"><a href="#使用工具" class="headerlink" title="使用工具"></a>使用工具</h2><p>之后看题目用stegsolve打开看到这张图片。<br><img src="/2019/04/05/LSB/java01.png" alt="Image"><br>使用stegsolve打开图片，按右方向键查看各通道显示的图像。一般有些题目会在某一个图像通道中直接显示出flag，但是显然这题不行，看来还需要绕些弯，要获取最低位的图片信息。<br>打开后使用Data Extract: 数据抽取，图片中隐藏数据的抽取。可以看到<img src="/2019/04/05/LSB/java05.png" alt="Image"><br>这时 看到这 突然会不知道如何去选择，或者乱选一气，当然这绝对出不来。那么我们应该如何去点。回到最开始的图片中<img src="/2019/04/05/LSB/java01.png" alt="Image">向右边一直翻动会发现<br>alpha plane7-0全是一个颜色没有任何变化，之后继续翻动会发现</p>
 <p><img src="/2019/04/05/LSB/java02.png" alt="Image"></p>
 <p>Red plane0这里左上角好像有些字符 继续翻动</p>
 <p><img src="/2019/04/05/LSB/java03.png" alt="Image"><br>green plane0 左上角也同样有字符一样继续翻动</p>
-<p><img src="/2019/04/05/LSB/java04.png" alt="Image"><br>blue  plane0左上角也有。这时候回到图片分析里  看到bit planes看到里面有通道选择 对应上面的三个0通道选择<img src="/2019/04/05/LSB/java05.png" alt="Image"><br>同时bit order 选择LSB一栏点击预览 可以得到<img src="/2019/04/05/LSB/java&lt;!--  --&gt;06.png" alt="Image">这时候看到上面有编码出现向上拉动，会发现flag<img src="/2019/04/05/LSB/java05.png" alt="Image"><br>这里我们就拿到了这道题的flag 就是 have a good time！</p>
+<p><img src="/2019/04/05/LSB/java04.png" alt="Image"><br>blue  plane0左上角也有。这时候回到图片分析里  看到bit planes看到里面有通道选择 对应上面的三个0通道选择<img src="/2019/04/05/LSB/java05.png" alt="Image"><br>同时bit order 选择LSB一栏点击预览 可以得到<img src="/2019/04/05/LSB/java06.png" alt="Image">这时候看到上面有编码出现向上拉动，会发现flag<img src="/2019/04/05/LSB/java05.png" alt="Image"><br>这里我们就拿到了这道题的flag 就是 have a good time！</p>
 <p>同样 第二道LSB 跟上述一样选择好通道一样可解出来<br><img src="/2019/04/05/LSB/TM01.png" alt="Image"><br>具体操作更上述一样就不在一一举出了。</p>
 <p>这是我这个小白的解题思路，如有出错还请大佬轻喷。</p>
 
