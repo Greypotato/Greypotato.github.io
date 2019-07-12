@@ -445,12 +445,12 @@
 <h3 id="1-反射型XSS"><a href="#1-反射型XSS" class="headerlink" title="1.反射型XSS"></a>1.反射型XSS</h3><p>进入到DVWA环境中，首先根据平台提示进入，之后选择安全等级。<br><img src="/2019/07/09/XSS/security.PNG" alt="Image">在这里是最低的，可以根据个人的需要进行调整</p>
 <h4 id="初级"><a href="#初级" class="headerlink" title="初级"></a>初级</h4><p>我们进入到其中的反射型XSS（Reflected）中，在右下角有一个Viwe source 这个点击我们可以看到页面的源代码。之后进行尝试。<img src="/2019/07/09/XSS/Reflected1.PNG" alt="Image"></p>
 <p>可以看到源码中没有任何的过滤，我们可以使用最常用的也是最基本的语句： script alert(/dxy/) /script （&lt;&gt;由于编辑器使用后默认为网页源代码这里给去掉了，各位进行试验的时候记得加上！）<br><img src="/2019/07/09/XSS/D1ROK.PNG" alt="Image"></p>
-<h4 id="中级"><a href="#中级" class="headerlink" title="中级"></a>中级</h4><p>接下来我们选择一下等级。选择到中级Medium。<br>可以进行一下实验看中级下原来可以弹窗的初级语句有什么变化没有。输入后发现<img src="/2019/07/09/XSS/REZC1.PNG" alt="Image"></p>
+<h4 id="中级"><a href="#中级" class="headerlink" title="中级"></a>中级</h4><p>接下来我们选择一下等级。选择到中级Medium。<br>可以进行一下实验看中级下原来可以弹窗的初级语句有什么变化没有。输入后发现<img src="/2019/07/09/XSS/1.PNG" alt="Image"></p>
 <p>可以看出没有任何的弹窗提示 ，只是出现了你刚才命令弹窗中的内容。<br>这时候我们同样的方式查看他的源代码。发现有一部分被过滤掉了。<br><img src="/2019/07/09/XSS/REZY.PNG" alt="Image"></p>
 <p>在这里我们可以清晰的看到我们输入的字符中发现前面的&lt; script&gt;没有了，那就看看源代码中有什么过滤方式把&lt; script&gt;给过滤掉了.<br>str_replace(‘&lt; script&gt;’ ‘’)这里的str_replace（）函数以其他字符替换字符串中的一些字符，该函数区分大小写。使用 str_ireplace() 函数执行不区分大小写的搜索。</p>
 <p>这里我们了解了该函数区分大小写。这样我们就可以使用大小写来进行绕过他的过滤从而达到我们想要的效果。<br>&lt; ScRipt&gt;alert(/sl/)&lt;/ script&gt;这样来实现结果。<br><img src="/2019/07/09/XSS/rezOK2.PNG" alt="Image"><br>PS：这个地方由于只是用了一个过滤，我们可以用其他的方法绕过去，继续进行。<br>例如双写绕过的写法PS：我又把&lt;&gt;加上了这样看起来方便，只是源代码的‘&lt;’后面有一个空格记得清除。</p>
 <p>&lt; sc&lt; script&gt;ript&gt;alert(/sl/)&lt;/ script&gt;<br>使用这个双写绕过的写法看到str_replace() 函数把包裹在外层的 &lt; script&gt;给过滤掉了，但是我里面的语句并不会过滤掉，这样的话 我内部的语句同样来说可以继续执行下去。测试木的问题。成功。<br>进入下一个等级</p>
-<h4 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h4><p> 进入高级节奏，输入之前的命令试试吧 我们输入之前初级的语句，尝试看看它过滤掉了什么。<br> <img src="/2019/07/09/XSS/G1.PNG" alt="Image"><br> 结果输入进去发现只剩下了个‘&gt;’ 。。。这样的情况，还是看看源代码比较好。<img src="/2019/07/09/XSS/G1ym.PNG" alt="Image"><br> 这里我看到了一个新的函数preg_replace（）函数  个人不太懂所以去搜索了一下，得到的是这样的结果。</p>
+<h4 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h4><p> 进入高级节奏，输入之前的命令试试吧 我们输入之前初级的语句，尝试看看它过滤掉了什么。<br> <img src="/2019/07/09/XSS/G1.PNG" alt="Image"><br> 结果输入进去发现只剩下了个‘&gt;’ 。。。这样的情况，还是看看源代码比较好。<img src="/2019/07/09/XSS/G1YM.PNG" alt="Image"><br> 这里我看到了一个新的函数preg_replace（）函数  个人不太懂所以去搜索了一下，得到的是这样的结果。</p>
 <p> preg_replace 函数执行一个正则表达式的搜索和替换。个人还是不太懂，于是我又去详细的了解了一下。<br> 例如:$str=”as2223adfsf0s4df0sdfsdf”;</p>
 <p>echo preg_replace(“/0/“,””,$str);</p>
 <p>这里的意思是去掉0字符，此时相当于 replace的功能, preg_replace(“/0/“,”A”,$str); 这样就是将0变成A的意思了<br>这样来看就比较明了了。 ps:匹配的字符串必须加/ / （可以看看第一个参数）</p>
