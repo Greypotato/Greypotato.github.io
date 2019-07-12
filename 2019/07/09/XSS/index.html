@@ -445,7 +445,7 @@
 <h3 id="1-反射型XSS"><a href="#1-反射型XSS" class="headerlink" title="1.反射型XSS"></a>1.反射型XSS</h3><p>进入到DVWA环境中，首先根据平台提示进入，之后选择安全等级。<br><img src="/2019/07/09/XSS/security.PNG" alt="Image">在这里是最低的，可以根据个人的需要进行调整</p>
 <h4 id="初级"><a href="#初级" class="headerlink" title="初级"></a>初级</h4><p>我们进入到其中的反射型XSS（Reflected）中，在右下角有一个Viwe source 这个点击我们可以看到页面的源代码。之后进行尝试。<img src="/2019/07/09/XSS/Reflected1.PNG" alt="Image"></p>
 <p>可以看到源码中没有任何的过滤，我们可以使用最常用的也是最基本的语句： script alert(/dxy/) /script （&lt;&gt;由于编辑器使用后默认为网页源代码这里给去掉了，各位进行试验的时候记得加上！）<br><img src="/2019/07/09/XSS/D1ROK.PNG" alt="Image"></p>
-<h4 id="中级"><a href="#中级" class="headerlink" title="中级"></a>中级</h4><p>接下来我们选择一下等级。选择到中级Medium。<br>可以进行一下实验看中级下原来可以弹窗的初级语句有什么变化没有。输入后发现<img src="/2019/07/09/XSS/REZC.PNG" alt="Image"></p>
+<h4 id="中级"><a href="#中级" class="headerlink" title="中级"></a>中级</h4><p>接下来我们选择一下等级。选择到中级Medium。<br>可以进行一下实验看中级下原来可以弹窗的初级语句有什么变化没有。输入后发现<img src="/2019/07/09/XSS/REZC1.PNG" alt="Image"></p>
 <p>可以看出没有任何的弹窗提示 ，只是出现了你刚才命令弹窗中的内容。<br>这时候我们同样的方式查看他的源代码。发现有一部分被过滤掉了。<br><img src="/2019/07/09/XSS/REZY.PNG" alt="Image"></p>
 <p>在这里我们可以清晰的看到我们输入的字符中发现前面的&lt; script&gt;没有了，那就看看源代码中有什么过滤方式把&lt; script&gt;给过滤掉了.<br>str_replace(‘&lt; script&gt;’ ‘’)这里的str_replace（）函数以其他字符替换字符串中的一些字符，该函数区分大小写。使用 str_ireplace() 函数执行不区分大小写的搜索。</p>
 <p>这里我们了解了该函数区分大小写。这样我们就可以使用大小写来进行绕过他的过滤从而达到我们想要的效果。<br>&lt; ScRipt&gt;alert(/sl/)&lt;/ script&gt;这样来实现结果。<br><img src="/2019/07/09/XSS/rezOK2.PNG" alt="Image"><br>PS：这个地方由于只是用了一个过滤，我们可以用其他的方法绕过去，继续进行。<br>例如双写绕过的写法PS：我又把&lt;&gt;加上了这样看起来方便，只是源代码的‘&lt;’后面有一个空格记得清除。</p>
