@@ -4,9 +4,12 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="MISC（一）练习, Greypotato">
-    <meta name="description" content="i春秋 MISC 神秘的文件一天最少一道CTF题目，只能多不能少下载文件，并没有后缀，winhex走一波发现开头是一个PNG文件
-更改后缀后，得到图片，打开 题目说：不知名的文件，貌似已经损坏，你能找到里面隐藏的信息吗？  看来这个文件应该">
+    <meta name="keywords" content="密码（练习一）, Greypotato">
+    <meta name="description" content="围在栅栏里的爱进入看到
+根据题目我们得到由点”.”和“-”组成的密码，初步判断是摩斯密码，找个网站进行在线解密。
+
+ 得到解密结果KIQLWTFCQGNSOO
+一串没有意义的的字母串，根据题目给的提示“最近一直在好奇一个问题，QWE到底等不">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>MISC（一）练习 | Greypotato</title>
+    <title>密码（练习一） | Greypotato</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -258,13 +261,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        MISC（一）练习
+                        密码（练习一）
                     </div>
                 </div>
             </div>
@@ -375,8 +378,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/MISC（一）/" target="_blank">
-                                <span class="chip bg-color">MISC（一）</span>
+                            <a href="/tags/密码（练习一）/" target="_blank">
+                                <span class="chip bg-color">密码（练习一）</span>
                             </a>
                         
                     </div>
@@ -390,7 +393,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-14
+                    2019-07-13
                 </div>
 
                 
@@ -406,43 +409,49 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="i春秋-MISC-神秘的文件"><a href="#i春秋-MISC-神秘的文件" class="headerlink" title="i春秋 MISC 神秘的文件"></a>i春秋 MISC 神秘的文件</h2><p>一天最少一道CTF题目，只能多不能少<br>下载文件，并没有后缀，winhex走一波发现开头是一个PNG文件<br><img src="/2019/07/14/XL/ML1.PNG" alt="Image"></p>
-<p>更改后缀后，得到图片，打开<br><img src="/2019/07/14/XL/ML2.PNG" alt="Image"><br> 题目说：不知名的文件，貌似已经损坏，你能找到里面隐藏的信息吗？<br>  看来这个文件应该是被损坏过了，而且还有隐藏的信息。看完winhex中<br>  没有什么新的收获。</p>
-<p>既然这样给放到Stegsolve.jar 中看看有啥隐藏的东西。<br>正常的流程向下翻着看发现了这点东西。根据我之前写的隐写LSB发现这里面有点东西。<br><img src="/2019/07/14/XL/ML3.PNG" alt="Image"><br>那索性就给他直接分析一波。<br>使用Analyse，Data Extrect查看一下。<br><img src="/2019/07/14/XL/ML4.PNG" alt="Image"><br>之后save Bin下来，然后题目又知道这个文件损坏，那肯定是叫我们修复文件。<br>也不是压缩包，怎么修复。winhex再次看看里面有啥东西没有。<br><img src="/2019/07/14/XL/ML5.PNG" alt="Image"><br>感觉没什么不对的 头尾也不是正常的png jpg gif的格式，百度了一下图片格式的文件头尾，感觉收获不大。再次返回winhex查看。感觉有点不太懂，尝试着转化了其他格式的也不对，无奈去大佬的blog查看一下 竟然是个BMP文件 之前没有了解到 然后使用了BMP文件头尾进行了更改为<br>424D 之后打开。<br><img src="/2019/07/14/XL/MLFLAG.PNG" alt="Image"><br>得到flag</p>
-<p> PS：补充文件头的类型格式的补充，还需要的对这些进行加强理解。<br> <img src="/2019/07/14/XL/MLPS.PNG" alt="Image"></p>
-<h2 id="丘比龙De女神"><a href="#丘比龙De女神" class="headerlink" title="丘比龙De女神"></a>丘比龙De女神</h2><h3 id="题目简介"><a href="#题目简介" class="headerlink" title="题目简介"></a>题目简介</h3><p>丘比龙是丘比特的弟弟，由于吃了太多的甜甜圈导致他飞不动了！<br>没错 里面隐藏了一张女神的照片 flag是照片文件的md5值(小写) 记住加上flag{}</p>
-<p>既然是一张照片而且名字就是gif 那直接改后缀.gif。得到一张动图，然而图片中并没有任何的提示语句。<br><img src="/2019/07/14/XL/DL1.PNG" alt="Image"><br>题目中也说这里面隐藏了一张女神的照片，那应该就是zip压缩格式了。直接改后缀为zip。发现里面果然有一张照片<br><img src="/2019/07/14/XL/DL2.PNG" alt="Image"><br>直接解压，发现解压不出来。可以看到压缩包中有一个名为nvshen.jpg的图片文件，但是压缩包是损坏的，没有办法将他解压出来，所以我进一步得出结论，由于可以正常的显示出gif文件，所以这个文件的gif部分的文件头和文件尾是正常的，然后存在正常的zip文件的尾部，所以问题一定是出现在他的zip文件头。</p>
-<p>由于在十六进制的gif文件中后边存在nvshen.jpg这样的字样，我们搜索以下以下前边还有没有关于这个文件的信息。</p>
-<p>搜索里面的nvshen 看到</p>
-<p><img src="/2019/07/14/XL/DL5.PNG" alt="Image"><br>看到前面有个love，love前面的代码又有个分号，003B这好像是gif动态图的结尾。那我们既然知道这个里面有隐藏的文件前面又结尾了，这不是正好吗，zip的头部不正好从这里开始吗，那我就直接开始整了 把6C 6F 76 65改成了50 4B 03 04。再打开试试看</p>
-<p><img src="/2019/07/14/XL/DL4.PNG" alt="Image">嗯哼，能打开了。<br>可是文件竟然要密码。前面刚好看到love，第一反应，谁没事干在自己的文件里放这个词 ，输进去看看。哦吼，打开了。果然</p>
-<p><img src="/2019/07/14/XL/DL6.PNG" alt="Image"><br>PS：题目给我说flag是照片文件的md5值。那就网上搜索一波，发现了这个网站<a href="http://tool.zhengxianjun.com/file-hash" target="_blank" rel="noopener">http://tool.zhengxianjun.com/file-hash</a><br>进去把图片传上去。解开<br><img src="/2019/07/14/XL/DL7.PNG" alt="Image"><br>成功拿到了flag。</p>
-<p>PS：本题目的考察是对不同类型十六进制文件的文件头掌握,信息收集，对损坏文件的修补。</p>
-<h2 id="功夫秘籍"><a href="#功夫秘籍" class="headerlink" title="功夫秘籍"></a>功夫秘籍</h2><p>简介：传说得到这个秘籍的人都修炼成了绝世神功。（话说咱也想练成绝世神功）<br>下载下来看是个压缩包，那就直接开，结果它打不开。打不开就扔到winhex中吧<br><img src="/2019/07/14/XL/KF1.PNG" alt="Image"><br>开头提示我是PNG。那就把图片转化为PNG打开<br><img src="/2019/07/14/XL/KF2.PNG" alt="Image">（如来神掌）还是继续放到winhex中吧。<br>看看开头看看结尾。发现结尾好像有提示。<br><img src="/2019/07/14/XL/KF3.PNG" alt="Image"><br>将其抠出来 猜想是某种加密方式，base64解码得：</p>
-<p><img src="/2019/07/14/XL/KF4.PNG" alt="Image"></p>
-<p>T_ysK9_5rhk__uFMt}3El{nu@E<br>看到}{ 这个特征略明显的就是栅栏解密啊<br>位数嘛我就试了两次就出来了<br><img src="/2019/07/14/XL/KF5.PNG" alt="Image"><br>输入就OK了 （绝世秘籍给你了）</p>
-<h2 id="64格"><a href="#64格" class="headerlink" title="64格"></a>64格</h2><p>下载解压发现是个gif但是发现你却打不开这个gif 依旧丢到winhex里面去，发现少文件头。那咱就加上这里我用的010 editor 这个加东西个人感觉方便点<br><img src="/2019/07/14/XL/GZ1.PNG" alt="Image"><br>然后图片就开始动起来。发现一个小黄人64格中一直动，之后我用PS打开了这个文件，发现又19个图层一个一个的保存下来看看<br><img src="/2019/07/14/XL/GZ2.PNG" alt="Image"><br>题目是64格。图片中是64个格子。第一反应base64但是 那是解密 我们需要对应的字母 应该是64进制没错了 继续看一波</p>
-<p><img src="/2019/07/14/XL/GZ3.PNG" alt="Image">正好64个格子对应的应该是64进制，之后对应这维尼所在的格子求得18个数字<br>16，53，17等等<br>再将数字对应百度百科下的表解得字母<br>得到Q1RGe2FiY19kZWZfZ30<br>base64解码之<br>得到CTF{abc_def_g}</p>
-<h2 id="flag-xls"><a href="#flag-xls" class="headerlink" title="flag.xls"></a>flag.xls</h2><p>直接下载看到了一个表格。？？表格什么鬼，打开还加密。</p>
-<p><img src="/2019/07/14/XL/WD1.PNG" alt="Image"></p>
-<p>那咱们换个用Notepad++打开、</p>
-<p>直接打开了 可以看到<img src="/2019/07/14/XL/WD2.PNG" alt="Image"><br>打开之后尝试搜索flag或者key等 关键字词<br>一直下一个查找flag。知道找到为止。<br><img src="/2019/07/14/XL/WD3.PNG" alt="Image"><br>OK找到了。<br>这道题怎么说不算是很难，主要是需要的脑洞，不能只挂在一个点上想到用其他的打开。</p>
-<h2 id="安全杂项-紧急报文"><a href="#安全杂项-紧急报文" class="headerlink" title="安全杂项-紧急报文"></a>安全杂项-紧急报文</h2><p>这个杂项？好像是密码把。<br><img src="/2019/07/14/XL/BW1.PNG" alt="Image"><br>字符的密文，然后我又想起来ASCII密码.但是有感觉不太对。因为两位一起的，越来越迷糊，越分析越不对劲。只好百度了一下。ADFGX密码？？第一次听到。</p>
-<p>PS：ADFGX密码：ADFGX密码(ADFGX Cipher)是结合了改良过的Polybius方格替代密码与单行换位密码的矩阵加密密码，使用了5个合理的密文字母：A，D，F，G，X，这些字母之所以这样选择是因为当转译成摩尔斯电码(ADFGX密码是德国军队在一战发明使用的密码)不易混淆，目的是尽可能减少转译过程的操作错误。<br><img src="/2019/07/14/XL/AD.PNG" alt="Image"></p>
-<p>标准解密实现 (以ADFGX为例)<br>假设我们拿到了密文DFGDGGAGXFXXFDDGDA，移位密钥china，密码表phqgmeaynofdxkrcvszwbutil。</p>
-<p>先计算密文长度为18，移位密钥长度为5，则可以推算出移位密钥中有三个字母下会排下4个字母，移位密钥前三位是chi，因此chi下会排4个字母。</p>
-<p>将密钥china按照字母顺序排列，得到achin，然后开始排列18个字母，其中chi排4个，其他排3个，得到<br><img src="/2019/07/14/XL/AD1.PNG" alt="Image"></p>
-<p>然后排列回来</p>
-<p><img src="/2019/07/14/XL/AD2.PNG" alt="Image"><br>一行一行读取，两两分割，然后对照密码表取回正确消息</p>
-<p>这个就是解密的实现了<br>解析一下密文，解析结果是：flagxidianctf</p>
-<p>OK就是这个了flag_Xd{hSh_ctf:flagxidianctf}</p>
-<h2 id="雌黄出其唇吻"><a href="#雌黄出其唇吻" class="headerlink" title="雌黄出其唇吻"></a>雌黄出其唇吻</h2><p> 打开看到<img src="/2019/07/14/XL/CH1.PNG" alt="Image"></p>
-<p>这里显示了一些奇异的字符，看不出是什么编码,且每次点击这个链接出现的字符都不一样，看来要另寻他路去解这道题</p>
-<p>Robots协议（也称为爬虫协议、机器人协议等）的全称是“网络爬虫排除标准”（Robots Exclusion Protocol），网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取。</p>
-<p>在该链接后面加上robots.txt看看有什么效果<br><img src="/2019/07/14/XL/CH2.PNG" alt="Image"><br>好像没啥变化  检查下 看看<br>果然 最底下还是有东西<br><img src="/2019/07/14/XL/CH3.PNG" alt="Image"></p>
-<p>这是一个Sitemap 可方便网站管理员通知搜索引擎他们网站上有哪些可供抓取的网页。最简单的 Sitemap 形式，就是XML 文件，在其中列出网站中的网址以及关于每个网址的其他元数据（上次更新的时间、更改的频率以及相对于网站上其他网址的重要程度为何等），以便搜索引擎可以更加智能地抓取网站。</p>
-<p>知道了就访问一波<br>看到了<img src="/2019/07/14/XL/CH4.PNG" alt="Image"><br>看到flag应该是个加密base64走起 得到flag：<br>7d175cCTF{robots_could_leak_information}f7c9db<br>搞定了</p>
-<h2 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h2><p>今天的练习暂时到此，大部分都是一般的题目不是很难 但也需要思考去如何做，一步步的理清思路能够有助于自己的提高。加油！需要了解的东西还是很多。</p>
+                <h2 id="围在栅栏里的爱"><a href="#围在栅栏里的爱" class="headerlink" title="围在栅栏里的爱"></a>围在栅栏里的爱</h2><p>进入看到<br><img src="http://i1.fuimg.com/693893/6b9c1d75b439889e.png" alt="Image"></p>
+<p>根据题目我们得到由点”.”和“-”组成的密码，初步判断是摩斯密码，找个网站进行在线解密。</p>
+<p><img src="http://i1.fuimg.com/693893/966b9d26a26bb0a3.png" alt="Image"></p>
+<p> 得到解密结果KIQLWTFCQGNSOO</p>
+<p>一串没有意义的的字母串，根据题目给的提示“最近一直在好奇一个问题，QWE到底等不等于ABC？”</p>
+<p>QWE指的是键盘上字母的排列顺序，ABC指的是26个字母的排列顺序<br>既然这样那就是<br><img src="http://i1.fuimg.com/693893/5ecf5acfeb86d7cf.png" alt="Image"></p>
+<p>QWERTYUIOPASDFGHJKLZXCVBNM</p>
+<p>ABCDEFGHIJKLMNOPQRSTUVWSYZ</p>
+<p>一一对应解密</p>
+<p>这样得到新的密码串：rhasbenvaoylii</p>
+<p>进行一次翻转</p>
+<p>得到iilyoavnebsah<br>既然题目给了栅栏应该能够再用到一次栅栏加密 所以</p>
+<p><img src="http://i1.fuimg.com/693893/2128ba04cfbc3f9b.png" alt="Image"></p>
+<p>得到flag</p>
+<p>CTF{iloveshiyanbar}</p>
+<h2 id="传统知识-古典密码"><a href="#传统知识-古典密码" class="headerlink" title="传统知识+古典密码"></a>传统知识+古典密码</h2><p>小明某一天收到一封密信，信中写了几个不同的年份<br>辛卯，癸巳，丙戌，辛未，庚辰，癸酉，己卯，癸巳。<br>信的背面还写有“+甲子”，请解出这段密文。<br>key值：CTF{XXX}</p>
+<p>密码加上古典知识。<br><img src="http://i1.fuimg.com/693893/3b6002436329b581.png" alt="Image"><br>首先百度了一下辛卯，发现了辛卯为干支之一，顺序为第28个。咦密码题 出现了数字。依次百度了剩下的。<br>发现了</p>
+<p>辛卯，顺序为第28个<br>癸巳，顺序为第30个<br>丙戌，顺序为第23个<br>辛未，顺序为第 8个<br>庚辰，顺序为第17个<br>癸酉，顺序为第10个<br>己卯，顺序为第16个<br>癸巳，顺序为第30个</p>
+<p>这样甲子又是第60个。</p>
+<p>辛卯，顺序为第28个 + 甲子(60) –&gt; 88 –&gt;  X</p>
+<p>癸巳，顺序为第30个 + 甲子(60) –&gt; 90 –&gt;  Z</p>
+<p>丙戌，顺序为第23个 + 甲子(60) –&gt; 93 –&gt;  S</p>
+<p>辛未，顺序为第8个 + 甲子(60) –&gt; 68 –&gt;  D</p>
+<p>庚辰，顺序为第17个 + 甲子(60) –&gt; 77 –&gt;  M</p>
+<p>癸酉，顺序为第10个 + 甲子(60) –&gt; 70 –&gt;  F</p>
+<p>己卯，顺序为第16个 + 甲子(60) –&gt; 76 –&gt;  L</p>
+<p>癸巳，顺序为第30个 + 甲子(60) –&gt; 90 –&gt;  Z</p>
+<p>加上一个甲子即60：88 90 93 68 77 70 76 90 </p>
+<p>转换成ASCII字母：XZSDMFLZ </p>
+<p>栅栏密码（两栏）：XMZFSLDZ</p>
+<p>凯撒：SHUANGYU</p>
+<p>OK提交成功 最后提交的时候要注意格式.</p>
+<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><p>小明某天在看js的时候，突然看到了这么一段代码，发现怎么也理不出代码逻辑，你能帮帮他吗？</p>
+<p>格式：SimCTF<br>首先进入到网页中可以看到一串代码<br><img src="http://i1.fuimg.com/693893/f883da4a40a3c7d8.png" alt="Image"><br>之后查看源代码，复制源码，打开网页控制台，将eval改为console.log回车执行<br>PS：复制的源代码一定是要复制查看的源代码。不要问我为啥知道的。。。</p>
+<p><img src="http://i1.fuimg.com/693893/be61f8ada87090b9.png" alt="Image"></p>
+<p>发现unicode编码\u0053\u0069\u006d\u0043\u0054\u0046\u007b\u006a\u0073\u005f\u0065\u006e\u0063\u006f\u0064\u0065\u007d<br><img src="http://i1.fuimg.com/693893/7aeecf49a01643de.png" alt="Image"></p>
+<p>之后进行的编码进行转码。<br><img src="http://i1.fuimg.com/693893/c6ed6fadd5943d6c.png" alt="Image"></p>
+<p>成功的解开。</p>
+<h2 id="这里没有key"><a href="#这里没有key" class="headerlink" title="这里没有key"></a>这里没有key</h2><p><img src="http://i1.fuimg.com/693893/936b9d7f6daa224f.png" alt="Image"><br>打开文件就给我一个弹窗说这里没有key。我差点就信了呢。查看源码走一波。</p>
+<p><img src="http://i2.tiimg.com/693893/e6d298ab1ae5a0b7.png" alt="Image"><br>看最后一行被注释掉的内容</p>
+<p><img src="http://i2.tiimg.com/693893/8f2619922337c4a8.png" alt="Image"><br>找一个网上的在线解题的网站：<a href="https://www.dheart.net/decode/index.php" target="_blank" rel="noopener">https://www.dheart.net/decode/index.php</a><br>解密<br><img src="http://i1.fuimg.com/693893/e5d5891d1f4312cc.png" alt="Image"><br>OK解出来了。</p>
+<h2 id="古典密码的安全性不高，但仍然十分美妙，请破译下面的密文"><a href="#古典密码的安全性不高，但仍然十分美妙，请破译下面的密文" class="headerlink" title="古典密码的安全性不高，但仍然十分美妙，请破译下面的密文"></a>古典密码的安全性不高，但仍然十分美妙，请破译下面的密文</h2><p>打开之后又是一大串的代码<br><img src="http://i1.fuimg.com/693893/26cae1736f3948ec.png" alt="Image"></p>
+<p>这一大串代码则置换密码可以通过高频词分析破解：这样的话我想到了去破解 但是手工破解是挺麻烦的，看看大佬们怎么整的 发现他们找了一个网站 <a href="https://quipqiup.com/" target="_blank" rel="noopener">https://quipqiup.com/</a> 于是乎借用了下<br><img src="http://i2.tiimg.com/693893/185759d33efc1f80.png" alt="Image"><br>这里第二个空格栏是说让我们提供些线索，也就是说我们觉得可能什么单词对应什么单词，填在此栏即可，dsln=flag 这个地方看他最后的代码中应该是flag的意思不妨尝试一下。<br><img src="http://i2.tiimg.com/693893/9d87d1a03a57c3ff.png" alt="Image">看看这些代码最后面的flag is  所以这些都是应该有些规律的去看看。就可以了逐一尝试我们觉得可行的flag，得到正确结果<br><img src="http://i2.tiimg.com/693893/d2609ec0e3d0d969.png" alt="Image"><br>OK成功</p>
 
             </div>
             <hr>
@@ -590,7 +599,7 @@
                     </span>
                     <a href="https://Greypotato.github.io" class="b-link-green">Greypotato</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/14/XL/" class="b-link-green">MISC（一）练习</a>
+                    <a href="/2019/07/13/MA/" class="b-link-green">密码（练习一）</a>
                 </p>
             </div>
         </div>
@@ -613,8 +622,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/2019/07/14/XL/">
                     <div class="card-image">
@@ -629,9 +637,9 @@
                     <div class="summary">i春秋 MISC 神秘的文件一天最少一道CTF题目，只能多不能少下载文件，并没有后缀，winhex走一波发现开头是一个PNG文件
 更改后缀后，得到图片，打开 题目说：不知名的文件，貌似已经损坏，你能找到里面隐藏的信息吗？  看来这个文件应该</div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-14
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-14
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -640,7 +648,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -659,24 +666,22 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/13/MA/">
+                <a href="/2019/07/11/XSSL/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="密码（练习一）">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="XSS(练习一)">
                         
-                        <span class="card-title">密码（练习一）</span>
+                        <span class="card-title">XSS(练习一)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">围在栅栏里的爱进入看到
-根据题目我们得到由点”.”和“-”组成的密码，初步判断是摩斯密码，找个网站进行在线解密。
-
- 得到解密结果KIQLWTFCQGNSOO
-一串没有意义的的字母串，根据题目给的提示“最近一直在好奇一个问题，QWE到底等不</div>
+                    <div class="summary">前言经过上次对XSS的理解与对XSS理解的一个小练习，清楚了之后，开始着手进行XSS平台搞一波。这是我练习的平台http://test.xss.tv/
+第一关
+这里的payload明确看到为4，查看地址栏与之对应的传参为test.但是页面上</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-13
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-11
                             </span>
                         <span class="publish-author">
                             
@@ -689,8 +694,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/密码（练习一）/" target="_blank">
-                        <span class="chip bg-color">密码（练习一）</span>
+                    <a href="/tags/XSS（练习一）/" target="_blank">
+                        <span class="chip bg-color">XSS（练习一）</span>
                     </a>
                     
                 </div>

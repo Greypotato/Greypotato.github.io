@@ -23,6 +23,25 @@
     
     
     <entry>
+      <title>密码（练习一）</title>
+      <link href="/2019/07/13/MA/"/>
+      <url>/2019/07/13/MA/</url>
+      
+        <content type="html"><![CDATA[<h2 id="围在栅栏里的爱"><a href="#围在栅栏里的爱" class="headerlink" title="围在栅栏里的爱"></a>围在栅栏里的爱</h2><p>进入看到<br><img src="http://i1.fuimg.com/693893/6b9c1d75b439889e.png" alt="Image"></p><p>根据题目我们得到由点”.”和“-”组成的密码，初步判断是摩斯密码，找个网站进行在线解密。</p><p><img src="http://i1.fuimg.com/693893/966b9d26a26bb0a3.png" alt="Image"></p><p> 得到解密结果KIQLWTFCQGNSOO</p><p>一串没有意义的的字母串，根据题目给的提示“最近一直在好奇一个问题，QWE到底等不等于ABC？”</p><p>QWE指的是键盘上字母的排列顺序，ABC指的是26个字母的排列顺序<br>既然这样那就是<br><img src="http://i1.fuimg.com/693893/5ecf5acfeb86d7cf.png" alt="Image"></p><p>QWERTYUIOPASDFGHJKLZXCVBNM</p><p>ABCDEFGHIJKLMNOPQRSTUVWSYZ</p><p>一一对应解密</p><p>这样得到新的密码串：rhasbenvaoylii</p><p>进行一次翻转</p><p>得到iilyoavnebsah<br>既然题目给了栅栏应该能够再用到一次栅栏加密 所以</p><p><img src="http://i1.fuimg.com/693893/2128ba04cfbc3f9b.png" alt="Image"></p><p>得到flag</p><p>CTF{iloveshiyanbar}</p><h2 id="传统知识-古典密码"><a href="#传统知识-古典密码" class="headerlink" title="传统知识+古典密码"></a>传统知识+古典密码</h2><p>小明某一天收到一封密信，信中写了几个不同的年份<br>辛卯，癸巳，丙戌，辛未，庚辰，癸酉，己卯，癸巳。<br>信的背面还写有“+甲子”，请解出这段密文。<br>key值：CTF{XXX}</p><p>密码加上古典知识。<br><img src="http://i1.fuimg.com/693893/3b6002436329b581.png" alt="Image"><br>首先百度了一下辛卯，发现了辛卯为干支之一，顺序为第28个。咦密码题 出现了数字。依次百度了剩下的。<br>发现了</p><p>辛卯，顺序为第28个<br>癸巳，顺序为第30个<br>丙戌，顺序为第23个<br>辛未，顺序为第 8个<br>庚辰，顺序为第17个<br>癸酉，顺序为第10个<br>己卯，顺序为第16个<br>癸巳，顺序为第30个</p><p>这样甲子又是第60个。</p><p>辛卯，顺序为第28个 + 甲子(60) –&gt; 88 –&gt;  X</p><p>癸巳，顺序为第30个 + 甲子(60) –&gt; 90 –&gt;  Z</p><p>丙戌，顺序为第23个 + 甲子(60) –&gt; 93 –&gt;  S</p><p>辛未，顺序为第8个 + 甲子(60) –&gt; 68 –&gt;  D</p><p>庚辰，顺序为第17个 + 甲子(60) –&gt; 77 –&gt;  M</p><p>癸酉，顺序为第10个 + 甲子(60) –&gt; 70 –&gt;  F</p><p>己卯，顺序为第16个 + 甲子(60) –&gt; 76 –&gt;  L</p><p>癸巳，顺序为第30个 + 甲子(60) –&gt; 90 –&gt;  Z</p><p>加上一个甲子即60：88 90 93 68 77 70 76 90 </p><p>转换成ASCII字母：XZSDMFLZ </p><p>栅栏密码（两栏）：XMZFSLDZ</p><p>凯撒：SHUANGYU</p><p>OK提交成功 最后提交的时候要注意格式.</p><h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><p>小明某天在看js的时候，突然看到了这么一段代码，发现怎么也理不出代码逻辑，你能帮帮他吗？</p><p>格式：SimCTF<br>首先进入到网页中可以看到一串代码<br><img src="http://i1.fuimg.com/693893/f883da4a40a3c7d8.png" alt="Image"><br>之后查看源代码，复制源码，打开网页控制台，将eval改为console.log回车执行<br>PS：复制的源代码一定是要复制查看的源代码。不要问我为啥知道的。。。</p><p><img src="http://i1.fuimg.com/693893/be61f8ada87090b9.png" alt="Image"></p><p>发现unicode编码\u0053\u0069\u006d\u0043\u0054\u0046\u007b\u006a\u0073\u005f\u0065\u006e\u0063\u006f\u0064\u0065\u007d<br><img src="http://i1.fuimg.com/693893/7aeecf49a01643de.png" alt="Image"></p><p>之后进行的编码进行转码。<br><img src="http://i1.fuimg.com/693893/c6ed6fadd5943d6c.png" alt="Image"></p><p>成功的解开。</p><h2 id="这里没有key"><a href="#这里没有key" class="headerlink" title="这里没有key"></a>这里没有key</h2><p><img src="http://i1.fuimg.com/693893/936b9d7f6daa224f.png" alt="Image"><br>打开文件就给我一个弹窗说这里没有key。我差点就信了呢。查看源码走一波。</p><p><img src="http://i2.tiimg.com/693893/e6d298ab1ae5a0b7.png" alt="Image"><br>看最后一行被注释掉的内容</p><p><img src="http://i2.tiimg.com/693893/8f2619922337c4a8.png" alt="Image"><br>找一个网上的在线解题的网站：<a href="https://www.dheart.net/decode/index.php" target="_blank" rel="noopener">https://www.dheart.net/decode/index.php</a><br>解密<br><img src="http://i1.fuimg.com/693893/e5d5891d1f4312cc.png" alt="Image"><br>OK解出来了。</p><h2 id="古典密码的安全性不高，但仍然十分美妙，请破译下面的密文"><a href="#古典密码的安全性不高，但仍然十分美妙，请破译下面的密文" class="headerlink" title="古典密码的安全性不高，但仍然十分美妙，请破译下面的密文"></a>古典密码的安全性不高，但仍然十分美妙，请破译下面的密文</h2><p>打开之后又是一大串的代码<br><img src="http://i1.fuimg.com/693893/26cae1736f3948ec.png" alt="Image"></p><p>这一大串代码则置换密码可以通过高频词分析破解：这样的话我想到了去破解 但是手工破解是挺麻烦的，看看大佬们怎么整的 发现他们找了一个网站 <a href="https://quipqiup.com/" target="_blank" rel="noopener">https://quipqiup.com/</a> 于是乎借用了下<br><img src="http://i2.tiimg.com/693893/185759d33efc1f80.png" alt="Image"><br>这里第二个空格栏是说让我们提供些线索，也就是说我们觉得可能什么单词对应什么单词，填在此栏即可，dsln=flag 这个地方看他最后的代码中应该是flag的意思不妨尝试一下。<br><img src="http://i2.tiimg.com/693893/9d87d1a03a57c3ff.png" alt="Image">看看这些代码最后面的flag is  所以这些都是应该有些规律的去看看。就可以了逐一尝试我们觉得可行的flag，得到正确结果<br><img src="http://i2.tiimg.com/693893/d2609ec0e3d0d969.png" alt="Image"><br>OK成功</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 密码（练习一） </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>XSS(练习一)</title>
       <link href="/2019/07/11/XSSL/"/>
       <url>/2019/07/11/XSSL/</url>
