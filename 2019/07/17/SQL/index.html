@@ -4,9 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="MISC（一）练习, Greypotato">
-    <meta name="description" content="i春秋 MISC 神秘的文件一天最少一道CTF题目，只能多不能少下载文件，并没有后缀，winhex走一波发现开头是一个PNG文件
-更改后缀后，得到图片，打开 题目说：不知名的文件，貌似已经损坏，你能找到里面隐藏的信息吗？  看来这个文件应该">
+    <meta name="keywords" content="SQL注入的学习与个人理解, Greypotato">
+    <meta name="description" content="什么是SQL注入攻击刚开始接触未免不清楚什么是SQL注入攻击，SQL注入不同于XSS攻击。SQL注入攻击通过构建特殊的输入作为参数传入Web应用程序，而这些输入大都是SQL语法里的一些组合，就是通过把SQL命令插入到Web表单提交或输入域名">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>MISC（一）练习 | Greypotato</title>
+    <title>SQL注入的学习与个人理解 | Greypotato</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -258,13 +257,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        MISC（一）练习
+                        SQL注入的学习与个人理解
                     </div>
                 </div>
             </div>
@@ -375,8 +374,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/MISC（一）/" target="_blank">
-                                <span class="chip bg-color">MISC（一）</span>
+                            <a href="/tags/SQL练习（一）/" target="_blank">
+                                <span class="chip bg-color">SQL练习（一）</span>
                             </a>
                         
                     </div>
@@ -390,7 +389,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-14
+                    2019-07-17
                 </div>
 
                 
@@ -406,43 +405,114 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="i春秋-MISC-神秘的文件"><a href="#i春秋-MISC-神秘的文件" class="headerlink" title="i春秋 MISC 神秘的文件"></a>i春秋 MISC 神秘的文件</h2><p>一天最少一道CTF题目，只能多不能少<br>下载文件，并没有后缀，winhex走一波发现开头是一个PNG文件<br><img src="/2019/07/14/XL/ML1.PNG" alt="Image"></p>
-<p>更改后缀后，得到图片，打开<br><img src="/2019/07/14/XL/ML2.PNG" alt="Image"><br> 题目说：不知名的文件，貌似已经损坏，你能找到里面隐藏的信息吗？<br>  看来这个文件应该是被损坏过了，而且还有隐藏的信息。看完winhex中<br>  没有什么新的收获。</p>
-<p>既然这样给放到Stegsolve.jar 中看看有啥隐藏的东西。<br>正常的流程向下翻着看发现了这点东西。根据我之前写的隐写LSB发现这里面有点东西。<br><img src="/2019/07/14/XL/ML3.PNG" alt="Image"><br>那索性就给他直接分析一波。<br>使用Analyse，Data Extrect查看一下。<br><img src="/2019/07/14/XL/ML4.PNG" alt="Image"><br>之后save Bin下来，然后题目又知道这个文件损坏，那肯定是叫我们修复文件。<br>也不是压缩包，怎么修复。winhex再次看看里面有啥东西没有。<br><img src="/2019/07/14/XL/ML5.PNG" alt="Image"><br>感觉没什么不对的 头尾也不是正常的png jpg gif的格式，百度了一下图片格式的文件头尾，感觉收获不大。再次返回winhex查看。感觉有点不太懂，尝试着转化了其他格式的也不对，无奈去大佬的blog查看一下 竟然是个BMP文件 之前没有了解到 然后使用了BMP文件头尾进行了更改为<br>424D 之后打开。<br><img src="/2019/07/14/XL/MLFLAG.PNG" alt="Image"><br>得到flag</p>
-<p> PS：补充文件头的类型格式的补充，还需要的对这些进行加强理解。<br> <img src="/2019/07/14/XL/MLPS.PNG" alt="Image"></p>
-<h2 id="丘比龙De女神"><a href="#丘比龙De女神" class="headerlink" title="丘比龙De女神"></a>丘比龙De女神</h2><h3 id="题目简介"><a href="#题目简介" class="headerlink" title="题目简介"></a>题目简介</h3><p>丘比龙是丘比特的弟弟，由于吃了太多的甜甜圈导致他飞不动了！<br>没错 里面隐藏了一张女神的照片 flag是照片文件的md5值(小写) 记住加上flag{}</p>
-<p>既然是一张照片而且名字就是gif 那直接改后缀.gif。得到一张动图，然而图片中并没有任何的提示语句。<br><img src="/2019/07/14/XL/DL1.PNG" alt="Image"><br>题目中也说这里面隐藏了一张女神的照片，那应该就是zip压缩格式了。直接改后缀为zip。发现里面果然有一张照片<br><img src="/2019/07/14/XL/DL2.PNG" alt="Image"><br>直接解压，发现解压不出来。可以看到压缩包中有一个名为nvshen.jpg的图片文件，但是压缩包是损坏的，没有办法将他解压出来，所以我进一步得出结论，由于可以正常的显示出gif文件，所以这个文件的gif部分的文件头和文件尾是正常的，然后存在正常的zip文件的尾部，所以问题一定是出现在他的zip文件头。</p>
-<p>由于在十六进制的gif文件中后边存在nvshen.jpg这样的字样，我们搜索以下以下前边还有没有关于这个文件的信息。</p>
-<p>搜索里面的nvshen 看到</p>
-<p><img src="/2019/07/14/XL/DL5.PNG" alt="Image"><br>看到前面有个love，love前面的代码又有个分号，003B这好像是gif动态图的结尾。那我们既然知道这个里面有隐藏的文件前面又结尾了，这不是正好吗，zip的头部不正好从这里开始吗，那我就直接开始整了 把6C 6F 76 65改成了50 4B 03 04。再打开试试看</p>
-<p><img src="/2019/07/14/XL/DL4.PNG" alt="Image">嗯哼，能打开了。<br>可是文件竟然要密码。前面刚好看到love，第一反应，谁没事干在自己的文件里放这个词 ，输进去看看。哦吼，打开了。果然</p>
-<p><img src="/2019/07/14/XL/DL6.PNG" alt="Image"><br>PS：题目给我说flag是照片文件的md5值。那就网上搜索一波，发现了这个网站<a href="http://tool.zhengxianjun.com/file-hash" target="_blank" rel="noopener">http://tool.zhengxianjun.com/file-hash</a><br>进去把图片传上去。解开<br><img src="/2019/07/14/XL/DL7.PNG" alt="Image"><br>成功拿到了flag。</p>
-<p>PS：本题目的考察是对不同类型十六进制文件的文件头掌握,信息收集，对损坏文件的修补。</p>
-<h2 id="功夫秘籍"><a href="#功夫秘籍" class="headerlink" title="功夫秘籍"></a>功夫秘籍</h2><p>简介：传说得到这个秘籍的人都修炼成了绝世神功。（话说咱也想练成绝世神功）<br>下载下来看是个压缩包，那就直接开，结果它打不开。打不开就扔到winhex中吧<br><img src="/2019/07/14/XL/KF1.PNG" alt="Image"><br>开头提示我是PNG。那就把图片转化为PNG打开<br><img src="/2019/07/14/XL/KF2.PNG" alt="Image">（如来神掌）还是继续放到winhex中吧。<br>看看开头看看结尾。发现结尾好像有提示。<br><img src="/2019/07/14/XL/KF3.PNG" alt="Image"><br>将其抠出来 猜想是某种加密方式，base64解码得：</p>
-<p><img src="/2019/07/14/XL/KF4.PNG" alt="Image"></p>
-<p>T_ysK9_5rhk__uFMt}3El{nu@E<br>看到}{ 这个特征略明显的就是栅栏解密啊<br>位数嘛我就试了两次就出来了<br><img src="/2019/07/14/XL/KF5.PNG" alt="Image"><br>输入就OK了 （绝世秘籍给你了）</p>
-<h2 id="64格"><a href="#64格" class="headerlink" title="64格"></a>64格</h2><p>下载解压发现是个gif但是发现你却打不开这个gif 依旧丢到winhex里面去，发现少文件头。那咱就加上这里我用的010 editor 这个加东西个人感觉方便点<br><img src="/2019/07/14/XL/GZ1.PNG" alt="Image"><br>然后图片就开始动起来。发现一个小黄人64格中一直动，之后我用PS打开了这个文件，发现又19个图层一个一个的保存下来看看<br><img src="/2019/07/14/XL/GZ2.PNG" alt="Image"><br>题目是64格。图片中是64个格子。第一反应base64但是 那是解密 我们需要对应的字母 应该是64进制没错了 继续看一波</p>
-<p><img src="/2019/07/14/XL/GZ3.PNG" alt="Image">正好64个格子对应的应该是64进制，之后对应这维尼所在的格子求得18个数字<br>16，53，17等等<br>再将数字对应百度百科下的表解得字母<br>得到Q1RGe2FiY19kZWZfZ30<br>base64解码之<br>得到CTF{abc_def_g}</p>
-<h2 id="flag-xls"><a href="#flag-xls" class="headerlink" title="flag.xls"></a>flag.xls</h2><p>直接下载看到了一个表格。？？表格什么鬼，打开还加密。</p>
-<p><img src="/2019/07/14/XL/WD1.PNG" alt="Image"></p>
-<p>那咱们换个用Notepad++打开、</p>
-<p>直接打开了 可以看到<img src="/2019/07/14/XL/WD2.PNG" alt="Image"><br>打开之后尝试搜索flag或者key等 关键字词<br>一直下一个查找flag。知道找到为止。<br><img src="/2019/07/14/XL/WD3.PNG" alt="Image"><br>OK找到了。<br>这道题怎么说不算是很难，主要是需要的脑洞，不能只挂在一个点上想到用其他的打开。</p>
-<h2 id="安全杂项-紧急报文"><a href="#安全杂项-紧急报文" class="headerlink" title="安全杂项-紧急报文"></a>安全杂项-紧急报文</h2><p>这个杂项？好像是密码把。<br><img src="/2019/07/14/XL/BW1.PNG" alt="Image"><br>字符的密文，然后我又想起来ASCII密码.但是有感觉不太对。因为两位一起的，越来越迷糊，越分析越不对劲。只好百度了一下。ADFGX密码？？第一次听到。</p>
-<p>PS：ADFGX密码：ADFGX密码(ADFGX Cipher)是结合了改良过的Polybius方格替代密码与单行换位密码的矩阵加密密码，使用了5个合理的密文字母：A，D，F，G，X，这些字母之所以这样选择是因为当转译成摩尔斯电码(ADFGX密码是德国军队在一战发明使用的密码)不易混淆，目的是尽可能减少转译过程的操作错误。<br><img src="/2019/07/14/XL/AD.PNG" alt="Image"></p>
-<p>标准解密实现 (以ADFGX为例)<br>假设我们拿到了密文DFGDGGAGXFXXFDDGDA，移位密钥china，密码表phqgmeaynofdxkrcvszwbutil。</p>
-<p>先计算密文长度为18，移位密钥长度为5，则可以推算出移位密钥中有三个字母下会排下4个字母，移位密钥前三位是chi，因此chi下会排4个字母。</p>
-<p>将密钥china按照字母顺序排列，得到achin，然后开始排列18个字母，其中chi排4个，其他排3个，得到<br><img src="/2019/07/14/XL/AD1.PNG" alt="Image"></p>
-<p>然后排列回来</p>
-<p><img src="/2019/07/14/XL/AD2.PNG" alt="Image"><br>一行一行读取，两两分割，然后对照密码表取回正确消息</p>
-<p>这个就是解密的实现了<br>解析一下密文，解析结果是：flagxidianctf</p>
-<p>OK就是这个了flag_Xd{hSh_ctf:flagxidianctf}</p>
-<h2 id="雌黄出其唇吻"><a href="#雌黄出其唇吻" class="headerlink" title="雌黄出其唇吻"></a>雌黄出其唇吻</h2><p> 打开看到<img src="/2019/07/14/XL/CH1.PNG" alt="Image"></p>
-<p>这里显示了一些奇异的字符，看不出是什么编码,且每次点击这个链接出现的字符都不一样，看来要另寻他路去解这道题</p>
-<p>Robots协议（也称为爬虫协议、机器人协议等）的全称是“网络爬虫排除标准”（Robots Exclusion Protocol），网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取。</p>
-<p>在该链接后面加上robots.txt看看有什么效果<br><img src="/2019/07/14/XL/CH2.PNG" alt="Image"><br>好像没啥变化  检查下 看看<br>果然 最底下还是有东西<br><img src="/2019/07/14/XL/CH3.PNG" alt="Image"></p>
-<p>这是一个Sitemap 可方便网站管理员通知搜索引擎他们网站上有哪些可供抓取的网页。最简单的 Sitemap 形式，就是XML 文件，在其中列出网站中的网址以及关于每个网址的其他元数据（上次更新的时间、更改的频率以及相对于网站上其他网址的重要程度为何等），以便搜索引擎可以更加智能地抓取网站。</p>
-<p>知道了就访问一波<br>看到了<img src="/2019/07/14/XL/CH4.PNG" alt="Image"><br>看到flag应该是个加密base64走起 得到flag：<br>7d175cCTF{robots_could_leak_information}f7c9db<br>搞定了</p>
-<h2 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h2><p>今天的练习暂时到此，大部分都是一般的题目不是很难 但也需要思考去如何做，一步步的理清思路能够有助于自己的提高。加油！需要了解的东西还是很多。</p>
+                <h2 id="什么是SQL注入攻击"><a href="#什么是SQL注入攻击" class="headerlink" title="什么是SQL注入攻击"></a>什么是SQL注入攻击</h2><p>刚开始接触未免不清楚什么是SQL注入攻击，SQL注入不同于XSS攻击。SQL注入攻击通过构建特殊的输入作为参数传入Web应用程序，而这些输入大都是SQL语法里的一些组合，就是通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。具体来说，它是利用现有应用程序，将（恶意的）SQL命令注入到后台数据库引擎执行的能力，它可以通过在Web表单中输入（恶意）SQL语句得到一个存在安全漏洞的网站上的数据库，而不是按照设计者意图去执行SQL语句。目前是对数据库进行攻击的最常用手段之一。</p>
+<h2 id="SQL注入产生的原因"><a href="#SQL注入产生的原因" class="headerlink" title="SQL注入产生的原因"></a>SQL注入产生的原因</h2><p>当我们访问动态网页时, Web 服务器会向数据访问层发起SQL查询请求，如果权限验证通过就会执行 SQL 语句。 这种网站内部直接发送的Sql请求一般不会有危险，但实际情况是很多时候需要结合用户的输入数据动态构造 SQL 语句，如果用户输入的数据被构造成恶意 SQL 代码，Web 应用又未对动态构造的 SQL语句使用的参数进行审查。所以就产生了一定的危害。</p>
+<p>在安恒的平台上学习的时候，它给了这样的例子：<br>首先我们的数据库中有一个表格<br><img src="http://i2.tiimg.com/693893/fadbaaa48e16a90c.png" alt="表格"></p>
+<p>之后对应的有登录页面，输入用户的账号密码，查询数据库，进行登录。在文本框内输入查询信息，提交能够达到显示登录结果。<br><img src="http://i2.tiimg.com/693893/470d77974a8fe550.png" alt="测试"></p>
+<p>但是SQL中有一个万能语句就是 ‘ or 1=’1，那么为什么是万能语句，为什么他能够绕过验证登录，进去。例如安恒给的测试：<br><img src="http://i2.tiimg.com/693893/f579bb40ddb9f34d.png" alt="测试"><br>在这个程序中，SQL语句为</p>
+<p><code>SELECT * FROM USERS WHERE ACCOUNT=&#39;aa&#39; OR 1=1 --&#39; AND PASSWORD=&#39;aa&#39;</code></p>
+<p>这里面–表示注释，这样看的话真正的SQL语句就是：<br><code>SELECT * FROM USERS WHERE ACCOUNT=&#39;aa&#39; OR 1=1</code><br>在这里，“1=1”它一定是真，是永真，所以该语句将返回USERS表中的所有记录。网站就受到了这个攻击。</p>
+<p>还有一种是通配符进行注入（此前并不知道这也是SQL注入的一种，也是刚刚通过安恒的课程了解到。）<br><img src="http://i2.tiimg.com/693893/1b018d5ea82a6660.png" alt="通配符例子"><br><img src="http://i2.tiimg.com/693893/76ec16606a6f3524.png" alt="例如"><br><img src="http://i2.tiimg.com/693893/32fa92bd16eb0973.png" alt="解析"></p>
+<h2 id="SQL注入语句分类"><a href="#SQL注入语句分类" class="headerlink" title="SQL注入语句分类"></a>SQL注入语句分类</h2><h3 id="整型注入"><a href="#整型注入" class="headerlink" title="整型注入"></a>整型注入</h3><p>  基于整型的SQL注入即存在SQL注入漏洞的URL参数为整数类型。</p>
+<p>应用程序数据库的字符型SQL语句为：<br><code>SELECT * FROM admin WHERE id =1 and 1=1</code></p>
+<h3 id="字符串注入"><a href="#字符串注入" class="headerlink" title="字符串注入"></a>字符串注入</h3><p> <code>SELECT * FROM admin WHERE id = &#39;1&#39; and 1=1#&#39;</code></p>
+<h3 id="搜索型注入"><a href="#搜索型注入" class="headerlink" title="搜索型注入"></a>搜索型注入</h3><pre><code>SELECT * FROM admin WHERE id LIKE &apos;%1%&apos; and &apos;%&apos;=&apos;%&apos;
+</code></pre><h3 id="Time盲注"><a href="#Time盲注" class="headerlink" title="Time盲注"></a>Time盲注</h3><pre><code>SELECT * FROM admin WHERE id =1 AND (SELECT if((SELECT substru(table_name,1,1) FROM users limit 0,1)=&apos;e&apos;,sleep(10),null))
+</code></pre><h3 id="Bool盲注"><a href="#Bool盲注" class="headerlink" title="Bool盲注"></a>Bool盲注</h3><pre><code>SELECT * FROM admin WHERE id = 1 and ascii(substr((SELECT database()),1,1,((&gt;99
+</code></pre><h3 id="报错型注入"><a href="#报错型注入" class="headerlink" title="报错型注入"></a>报错型注入</h3><pre><code>SELECT *FROM admin where ID = 1 AND (select 1 from (select count(*),concat(user(),floor(rand(0)*2))x from information_schema.tables group by x)a)
+</code></pre><h3 id="联合查询的类型"><a href="#联合查询的类型" class="headerlink" title="联合查询的类型"></a>联合查询的类型</h3><pre><code>SELECT column1,column2,colmn3 FROM admin WHERE id =&apos;1&apos; UNION SELECT column1, column2, column3 FROM users;
+</code></pre><p>PS:这里面的个别语句个人也不是很懂得，但总是需要先记录了解下来，之后在日后的学习中，逐步完善自己的知识储备。</p>
+<h2 id="判断Sql注入漏洞的类型"><a href="#判断Sql注入漏洞的类型" class="headerlink" title="判断Sql注入漏洞的类型"></a>判断Sql注入漏洞的类型</h2><p> 通常 Sql 注入漏洞分为 2 种类型：</p>
+<ul>
+<li><p>数字型</p>
+</li>
+<li><p>字符型</p>
+</li>
+</ul>
+<p> <br>其实所有的类型都是根据数据库本身表的类型所产生的，在我们创建表的时候会发现其后总有个数据类型的限制，而不同的数据库又有不同的数据类型，但是无论怎么分常用的查询数据类型总是以数字与字符来区分的，所以就会产生注入点为何种类型。</p>
+<h3 id="数字型判断"><a href="#数字型判断" class="headerlink" title="数字型判断"></a>数字型判断</h3><p>输入的参 x 为整型时，通常 abc.php 中 Sql 语句类型大致如下： select * from &lt;表名&gt; where id = x 这种类型可以使用经典的 and 1=1 和 and 1=2 来判断：</p>
+<p> Url 地址中输入 <a href="http://xxx/SL.phP?id=" target="_blank" rel="noopener">http://xxx/SL.phP?id=</a> x and 1=1 页面依旧运行正常，继续进行下一步。</p>
+<p> Url 地址中继续输入 <a href="http://xxx/SL.php?id=" target="_blank" rel="noopener">http://xxx/SL.php?id=</a> x and 1=2 页面运行错误，则说明此 Sql 注入为数字型注入。 </p>
+<p> 原因如下： 当输入 and 1=1时，后台执行 Sql 语句：</p>
+<p>  <code>select * from &lt;表名&gt; where id = x and 1=1</code></p>
+<p>没有语法错误且逻辑判断为正确，所以返回正常。</p>
+<p> 当输入 and 1=2时，后台执行 Sql 语句：</p>
+<p> <code>select * from &lt;表名&gt; where id = x and 1=2</code></p>
+<p>没有语法错误但是逻辑判断为假，所以返回错误。 我们再使用假设法：如果这是字符型注入的话，我们输入以上语句之后应该出现如下情况：<br>  <code>select * from &lt;表名&gt; where id = &#39;x and 1=1&#39;</code></p>
+<p>  <code>select * from &lt;表名&gt; where id = &#39;x and 1=2&#39;</code></p>
+<p>查询语句将 and 语句全部转换为了字符串，并没有进行 and 的逻辑判断，所以不会出现以上结果，故假设是不成立的。</p>
+<h3 id="字符型判断"><a href="#字符型判断" class="headerlink" title="字符型判断"></a>字符型判断</h3><p> 当输入的参 x 为字符型时，通常 abc.php 中 SQL 语句类型大致如下： select * from &lt;表名&gt; where id = ‘x’ 这种类型我们同样可以使用 and ‘1’=’1 和 and ‘1’=’2来判断：</p>
+<p> Url 地址中输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="noopener">http://xxx/abc.php?id=</a> x’ and ‘1’=’1 页面运行正常，继续进行下一步。<br> Url 地址中继续输入 <a href="http://xxx/abc.php?id=" target="_blank" rel="noopener">http://xxx/abc.php?id=</a> x’ and ‘1’=’2 页面运行错误，则说明此 Sql 注入为字符型注入。</p>
+<p> 原因如下： 当输入 and ‘1’=’1时，后台执行 Sql 语句：</p>
+<p>  <code>select * from &lt;表名&gt; where id = &#39;x&#39; and &#39;1&#39;=&#39;1&#39;</code></p>
+<p>  可以看到语法正确，逻辑判断正确，所以返回正确。</p>
+<p>  当输入 and ‘1’=’2时，后台执行 Sql 语句：<br>  <code>select * from &lt;表名&gt; where id = &#39;x&#39; and &#39;1&#39;=&#39;2&#39;</code></p>
+<p>语法正确，但逻辑判断错误，所以返回正确。</p>
+<h2 id="小练习"><a href="#小练习" class="headerlink" title="小练习"></a>小练习</h2><h3 id="SQL基本语句"><a href="#SQL基本语句" class="headerlink" title="SQL基本语句"></a>SQL基本语句</h3><p> 在进行注入练习前我认为需要进行SQL语句的练习。首先select的语句前面注入里就可以看到它的重要性了。<br>PHPstudy中本身就有sql的命令行，可以直接的进行练习。</p>
+<p>（1）使用数据库<br>use 数据库名称;</p>
+<p>（2）在users表里查询用户名为‘admin’的所有信息</p>
+<pre><code>select * from users where user=&apos;admin&apos;
+</code></pre><p>有三个要点，</p>
+<ol>
+<li>‘*’:通配符表示匹配所有内容，也就是来者不拒</li>
+<li>‘where’:关键字作为条件限定。</li>
+<li>在数据库中字符串时一般由单引号包住的<br>在这里，select是从数据库检索数据的。</li>
+</ol>
+<p>union 联合</p>
+<p>就是将union前面的数据，和后面的数据放在一起，以便能在一个表显示。什么叫放在一起呢？<br>请看例子：</p>
+<pre><code>select 1,2,3 union select 4,5,6;
+</code></pre><p>解析，我们知道select 1,2,3是输出三个数字，分别为1,2,3。后面的select也是一样输出3个数字。<br>要是后面的输出的数据数目不一致，那么则会导致下列的错误</p>
+<pre><code>The used SELECT statements have a different number of columns`
+</code></pre><p>order by<br>这个是让我们检索出来的数据进行升序或者降序排列的。</p>
+<pre><code>select user,user_id from users order by user
+</code></pre><p>在这里我们，介绍一个概念就是“字段”。字段也就是一个表里面的数据列，每一个字段表示一列。我们这里，我们select语句检索user,user_id两个数据列。当我们使用order by user的时候，会根据user数据列的的每一个数据的来进行排序，默认是升序asc。</p>
+<p> PS：我们除了使用字段名来作为order by的条件外，还可以使用数字。</p>
+<p>  1表示的第一个字段</p>
+<p>  2表示的第二个字段<br>  如此类推就可以了，但是当不存在那个字段的时候，就会产生这样的错误</p>
+<pre><code>unknown column name xx
+</code></pre><h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p>  还是通过安全龙进入DVWA实验室找到需要练习的项目<br>  <img src="http://i2.tiimg.com/693893/e62764dc44d42485.png" alt="练习1"><br>首先让我们输入ID 那就输个1或者2看看吧</p>
+<p>  <img src="http://i2.tiimg.com/693893/06934ae559a59d93.png" alt="练习1"></p>
+<p>  <img src="http://i2.tiimg.com/693893/6bcbcf2163813b8a.png" alt="练习1"></p>
+<p>这里可以看到它返回三行数据，一行是我们输入的用户ID。一行是用户名，另外一行是用户别名。<br><img src="http://i2.tiimg.com/693893/5536d6ddd32938aa.png" alt="练习1"></p>
+<p>这里看到地址栏中 ？id=1<br>这不就是注入的吗 对id这个参数进行测试<br>这里我们在输入框里面输入“1’”，注意1后面有一个单引号“’”。<br>可以发现，这里报错了。说我们的sql语句出现语法错误。</p>
+<p>之后我们开始注入首先我们需要 分析字段数<br>基本的话，他也是有两种方法的<br>分析字段数的原因是我们之后需要用union select语句获得我们需要的敏感数据。<br>）<br>根据order by知识知道，要是后面跟着的数字超出了字段数的时候，则会报错！通过这个我们可以确定字段数。<br>我们构造的payload如下：<br>1’ order by 1#<br>1’ order by 2#<br>1’ order by 3#<br>当输入到3的时候，发现它报错了。也就是说明字段数为2</p>
+<p><img src="http://i2.tiimg.com/693893/0554b2d2a84807bc.png" alt="练习1"></p>
+<p>那字段数为2，也就是select出来的数据列有两列。也就是我们可以通过union select出两个数据。好了我们来获得关于我们数据库的信息吧！<br>1、获取当前数据库名字，当前用户名<br>1’ union select database(),user()#</p>
+<p>atabase()将会返回当前网站所使用的数据库名字，user()将会返回进行当前查询的用户名。<br><img src="http://i2.tiimg.com/693893/a0b1a14cd999add9.png" alt="练习1"></p>
+<p>这里我们看到<br>当前数据库为:dvwa<br>当前用户名:root@localhost</p>
+<p>但是我们的目的的是获取当前的用户表，根据上面的信息，我们知道当前数据库名为dvwa。可是还不够。</p>
+<p>突然感觉自己会的语句真的不多。。。于是去找了找语句，参考了下 看到了这段话  </p>
+<pre><code>information_schema，是一个包含了mysql数据库所有信息的新华字典，有啥关于数据库的信息不知道问它没问题！它本质上还是一个database，存着其他各个数据的信息。在其中，有一个表长成这样tables。有一个表长这样columns。tables这个表存的是关于数据库中所有表的信息，他有个字段叫table_name，还有个字段叫做table_schema。其中table_name是表名，table_schema表示的表所在的数据库。对于columns，它有column_name,table_schema,table_name
+</code></pre><p>我们拥有的消息是数据库名，也就是说我们可以用</p>
+<p>   <code>-1&#39; union select table_name,2 from information_schema.tables where table_schema= &#39;dvwa&#39;#</code></p>
+<p>information_schema不就使我们的新华字典咯！这里我们使用一种语法，<br>“数据名.表名”<br>tables就相当于我们新华字典的目录，table_name是tables里面的字段。语句的意思就是，这里是一本新华字典帮我把数据库名为”dvwa”这个偏旁部首的字(表名)找出来。</p>
+<p><img src="http://i2.tiimg.com/693893/4f9005310806805a.png" alt="练习1"></p>
+<p>看到了users 这个肯定是我们需要找到表了 那么我们猜列名，注入</p>
+<p><code>1&#39; union select 1,group_concat(column_name) from information_schema.columns where table_name =&#39;users&#39;#</code></p>
+<p>得到列：<br>    user_id, first_name, last_name, user, password, avatar, last_login, failed_login, id, username,password</p>
+<p><img src="http://i2.tiimg.com/693893/310c1b506fc68149.png" alt="练习1"></p>
+<p>PS：使用这个需要注意。如果显示的地方太小你会看不到后面的字符，所以如果有限制建议一个一个的爆出来。</p>
+<p>猜用户密码，注入：</p>
+<p>1’ union select null,concat_ws(char(32,58,32),user,password) from users #  </p>
+<p>得到用户信息，例如admin数据，</p>
+<p><img src="http://i2.tiimg.com/693893/88cdf1edeeb8a019.png" alt="练习1"><br>我们看到了admin 5f4dcc3b5aa765d61d8327deb882cf99 账号密码 后面被加密了 应该是MD5解一下发现对应的就是password OK那么我们下面的账号密码应该都有了 解密 gordonb  密码是abc123</p>
+<p>OK我们来登陆试试<br><img src="http://i2.tiimg.com/693893/86a530a5c8cec685.png" alt="练习1"><br>登录成功。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>首先mysql的语法</p>
+<p>在where语句中，当出现多个字符串的时候，“=”将会选择优先级最高的一个，优先级是从左到右，依次降低的！也就是离“=”最近的一个。</p>
+<p>例子。</p>
+<p>第一个是和我们上面类似的sql查询语句</p>
+<p>select * from users where user_id = ‘1’’’;</p>
+<p>第二个是来阐明我们这个优先级的，</p>
+<p>select * from users where user_id = ‘1’’2’;</p>
+<p>可以看到，出来的结果还是和user_id=1一样。</p>
+<p>我们再看一个长长的，</p>
+<p>select * from users where user_id = ‘1’’2’’abc’’efg’;</p>
+<p>事实胜于雄辩，可以看到结果还是和上面的一样。</p>
+<p>测试方法(在判断注入时，最后一个引号没被闭合)：</p>
+<p>使用“#”符号来注释后面的单引号<br>到时查询语句将会变成这样，<br>select firstname,surname from users where id = ‘1’#’;</p>
+<p>使用“– ”，这里注意了“–”后面有一个空格。在url当中，我们需要使用“+”来代替“–”后面的空格。<br>到时查询语句将会变成这样，<br>select firstname,surname from users where id = ‘1’– ‘;</p>
+<p>information_schema，是一个包含了mysql数据库所有信息的新华字典，有啥关于数据库的信息不知道问它没问题！它本质上还是一个database，存着其他各个数据的信息。在其中，有一个表长成这样tables。有一个表长这样columns。tables这个表存的是关于数据库中所有表的信息，他有个字段叫table_name，还有个字段叫做table_schema。其中table_name是表名，table_schema表示的表所在的数据库。对于columns，它有column_name,table_schema,table_name</p>
+<p>暂时先初级，容我消化一下继续进行。</p>
 
             </div>
             <hr>
@@ -590,7 +660,7 @@
                     </span>
                     <a href="https://Greypotato.github.io" class="b-link-green">Greypotato</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/14/XL/" class="b-link-green">MISC（一）练习</a>
+                    <a href="/2019/07/17/SQL/" class="b-link-green">SQL注入的学习与个人理解</a>
                 </p>
             </div>
         </div>
@@ -613,7 +683,8 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/07/17/SQL/">
                     <div class="card-image">
@@ -627,9 +698,9 @@
                 <div class="card-content article-content">
                     <div class="summary">什么是SQL注入攻击刚开始接触未免不清楚什么是SQL注入攻击，SQL注入不同于XSS攻击。SQL注入攻击通过构建特殊的输入作为参数传入Web应用程序，而这些输入大都是SQL语法里的一些组合，就是通过把SQL命令插入到Web表单提交或输入域名</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-17
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -638,6 +709,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -656,24 +728,21 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/13/MA/">
+                <a href="/2019/07/14/XL/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="密码（练习一）">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="MISC（一）练习">
                         
-                        <span class="card-title">密码（练习一）</span>
+                        <span class="card-title">MISC（一）练习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">围在栅栏里的爱进入看到
-根据题目我们得到由点”.”和“-”组成的密码，初步判断是摩斯密码，找个网站进行在线解密。
-
- 得到解密结果KIQLWTFCQGNSOO
-一串没有意义的的字母串，根据题目给的提示“最近一直在好奇一个问题，QWE到底等不</div>
+                    <div class="summary">i春秋 MISC 神秘的文件一天最少一道CTF题目，只能多不能少下载文件，并没有后缀，winhex走一波发现开头是一个PNG文件
+更改后缀后，得到图片，打开 题目说：不知名的文件，貌似已经损坏，你能找到里面隐藏的信息吗？  看来这个文件应该</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-13
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-14
                             </span>
                         <span class="publish-author">
                             
@@ -686,8 +755,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/密码（练习一）/" target="_blank">
-                        <span class="chip bg-color">密码（练习一）</span>
+                    <a href="/tags/MISC（一）/" target="_blank">
+                        <span class="chip bg-color">MISC（一）</span>
                     </a>
                     
                 </div>
