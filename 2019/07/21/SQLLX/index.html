@@ -4,11 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="南邮CTF-WEB-writeup, Greypotato">
-    <meta name="description" content="WEB题签到题  打开界面看到：key在哪里？ 签到题都不会很难，查看源代码。
-
-md5 collision 首先还是先看看题
-题目提示给出了MD5 中间又有 md51=md52 看到前面有QNKCDZO 那么很显然啊 就是找到和‘QNKC">
+    <meta name="keywords" content="SQL靶场练习, Greypotato">
+    <meta name="description" content="前言 之前进行了SQL注入的学习，这里找到安全龙的实验室进行一波小小的练习。
+第一关首先进行注入点测试。
+一般来说先加一个单引号(英文)，来判断这里地址栏自动转化了URL编码输入“   ?id=1’  ”，回显为  “1” limit 0,">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +15,7 @@ md5 collision 首先还是先看看题
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>南邮CTF-WEB-writeup | Greypotato</title>
+    <title>SQL靶场练习 | Greypotato</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -260,13 +259,13 @@ md5 collision 首先还是先看看题
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        南邮CTF-WEB-writeup
+                        SQL靶场练习
                     </div>
                 </div>
             </div>
@@ -377,8 +376,8 @@ md5 collision 首先还是先看看题
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/web练习（一）/" target="_blank">
-                                <span class="chip bg-color">web练习（一）</span>
+                            <a href="/tags/SQL二）/" target="_blank">
+                                <span class="chip bg-color">SQL二）</span>
                             </a>
                         
                     </div>
@@ -392,7 +391,7 @@ md5 collision 首先还是先看看题
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-19
+                    2019-07-21
                 </div>
 
                 
@@ -408,60 +407,47 @@ md5 collision 首先还是先看看题
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="WEB题"><a href="#WEB题" class="headerlink" title="WEB题"></a>WEB题</h1><h2 id="签到题"><a href="#签到题" class="headerlink" title="签到题"></a>签到题</h2><p>  打开界面看到：key在哪里？ 签到题都不会很难，查看源代码。</p>
-<p><img src="http://i2.tiimg.com/693893/790efd1ced160d5d.png" alt="签到"></p>
-<h2 id="md5-collision"><a href="#md5-collision" class="headerlink" title="md5 collision"></a>md5 collision</h2><p> 首先还是先看看题<br><img src="http://i2.tiimg.com/693893/767f3f0592931fcf.png" alt="MD5"></p>
-<p>题目提示给出了MD5 中间又有 md51=md52 看到前面有QNKCDZO 那么很显然啊 就是找到和‘QNKCDZO’md5加密后相同的字符串。</p>
-<p>将QNKCDZO进行MD5加密，密文为0e830400451993494058024219903391</p>
-<p>PS：这里有个点需要注意 它的=是两个==  所以两个等号代表的是比较变量的值，而不会去比较变量的类型。</p>
-<p>在这里源码是PHP 肯定有它的用处那么PHP在进行比较运算时，如果遇到了0e\d+这种字符串，就会将这种字符串解析为科学计数法。<br>因为0exx都等于0，所以让两者相等我们只需再找到一个MD5加密后开头为0e的字符串即可。所以这里我们来找到相关的字符串</p>
-<p>PS:0e开头MD5小节</p>
-<p>s878926199a<br>0e545993274517709034328855841020<br>s155964671a</p>
-<p>0e342768416822451524974117254469<br>s214587387a</p>
-<p>0e848240448830537924465865611904<br>s214587387a</p>
-<p>0e848240448830537924465865611904<br>s878926199a</p>
-<p>0e545993274517709034328855841020<br>s1091221200a</p>
-<p>0e940624217856561557816327384675<br>s1885207154a</p>
-<p>之后在题目地址栏中输入A 就可以看到flag了<br><img src="http://i2.tiimg.com/693893/b958d833b0ff1f00.png" alt="MD5"></p>
-<h2 id="签到2"><a href="#签到2" class="headerlink" title="签到2"></a>签到2</h2><p> <img src="http://i2.tiimg.com/693893/d2d893da020908db.png" alt="签到"><br>看到让输入口令那就输入白。<br>然后输入的时候发现他有设置字数的限制。那我们就F12 修改吧。<br><img src="http://i2.tiimg.com/693893/badff07add372e19.png" alt="签到"><br>maxlength 之前是10 这里我给他改成了13  然后输入 口令<br><img src="http://i2.tiimg.com/693893/b23b10da1641358d.png" alt="签到"></p>
-<h2 id="这题不是WEB"><a href="#这题不是WEB" class="headerlink" title="这题不是WEB"></a>这题不是WEB</h2><p>打开上来就告诉你这题不是WEB<br><img src="http://i2.tiimg.com/693893/a3d9527d17c58dda.png" alt="web"><br>看到一张图  莫名？？？  看看源代码 也没发现啥 有没有可以输入的地方  题目还说不是web  不会是这个图片藏了东西吧  应该是  下载 放到winhex 里看看</p>
-<p>然后看看开头跟结尾 在结尾发现了flag<br><img src="http://i2.tiimg.com/693893/8530ac825611f5b1.png" alt="web"></p>
-<h2 id="层层递进"><a href="#层层递进" class="headerlink" title="层层递进"></a>层层递进</h2><p>题目上给了个a标签地址说是个微博。。点进去看看还真是。看题看题 进入题目</p>
-<p><img src="http://i1.fuimg.com/693893/aa9ad34fd02fc0d9.png" alt="题目"><br>搜索一下还真就可以，不过下面为啥一大片的空白。F12 检查检查。<br><img src="http://i1.fuimg.com/693893/8271f5da252f93b2.png" alt="检查"></p>
-<p>看到两个网址<br><img src="http://i1.fuimg.com/693893/fae09ce72f207bc2.png" alt="网址"><br>一个是南京论之语，嗯这个跟题目没得关系，看上面那个so.html<br>展开标签看到了一堆。。。<br><img src="http://i1.fuimg.com/693893/124c16a1fc9a2825.png" alt="展开"><br>????有点懵噢   咋一个套一个。。还这么多，题目是层层递进。这里肯定有东西。看到了一个404的<br><img src="http://i1.fuimg.com/693893/e6f0a59b1bc62bcc.png" alt="404"></p>
-<p>放到地址栏后面打开。果然有东西。<br>F12走一波<br><img src="http://i1.fuimg.com/693893/83ad2b8f657611ce.png" alt="检查"><br>看完后除了TD标签里一大堆的JS文件，也没啥，这么多JS？？？而且页面很简洁。<br>仔细瞅了一下又还真就是对了。<br><img src="http://i1.fuimg.com/693893/3dbe3d98e904206d.png" alt="结果"></p>
-<h2 id="AAencode"><a href="#AAencode" class="headerlink" title="AAencode"></a>AAencode</h2><p>打开题目链接<br><img src="http://i1.fuimg.com/693893/712a25e9e70d92ca.png" alt="题目"><br>记得学长说过，中间有表情是颜文字，不过应该是加过密的，编码不同应该是，先解一下，<br><img src="http://i1.fuimg.com/693893/4a3e5165ea052898.png" alt><br>颜文字出来了<br>控制台跑一波白<br><img src="http://i1.fuimg.com/693893/edc548bbba70dc0e.png" alt="答案"></p>
-<h2 id="单身二十年"><a href="#单身二十年" class="headerlink" title="单身二十年"></a>单身二十年</h2><p>打开题目 很是有趣啊 靠手速 哈哈哈哈<br><img src="http://i1.fuimg.com/693893/52f2e66b1639ce03.png" alt><br>看地址栏给你说没有key   只有这一个链接<br>看源代码也啥都没有 点跳转的时候发现有两个跳转。。原谅我手速不够啊  地址栏跳的太快了 截不了图啊<br> 这样的话应该要抓个包了 记得学长用过<br><img src="http://i1.fuimg.com/693893/6a859726f4be9400.png" alt="抓包"><br>首先先进行一波配置啊  我这里的配置参考的是 <a href="http://www.mamicode.com/info-detail-2206437.html" target="_blank" rel="noopener">http://www.mamicode.com/info-detail-2206437.html</a><br><img src="http://i1.fuimg.com/693893/4f820063d24a8ec1.png" alt="答案"></p>
-<h2 id="php-decode"><a href="#php-decode" class="headerlink" title="php decode"></a>php decode</h2><p>之前学过的PHP 试试<br><img src="http://i1.fuimg.com/693893/7e371088ce198670.png" alt><br>eval??/这里应该是输出了吧</p>
-<p>PHP eval() 函数</p>
-<p>定义和用法<br>eval() 函数把字符串按照 PHP 代码来计算。</p>
-<p>该字符串必须是合法的 PHP 代码，且必须以分号结尾。</p>
-<p>如果没有在代码字符串中调用 return 语句，则返回 NULL。如果代码中存在解析错误，则 eval() 函数返回 false。</p>
-<p>提示和注释<br>注释：返回语句会立即终止对字符串的计算。</p>
-<p>注释：该函数对于在数据库文本字段中供日后计算而进行的代码存储很有用。</p>
-<p>例子<br>&lt;?php<br>$string = “beautiful”;<br>$time = “winter”;</p>
-<p>$str = ‘This is a $string $time morning!’;<br>echo $str. “<br>“;</p>
-<p>eval(“\$str = \”$str\”;”);<br>echo $str;<br>?&gt;<br>输出：</p>
-<p>This is a $string $time morning!<br>This is a beautiful winter morning! </p>
-<p>但在这里eval里面肯定就是flag了，找个在线代码执行的网站，复制粘贴代码，将eval改成echo即可，得到flag！<br><img src="http://i1.fuimg.com/693893/7eafcebecc9f1ae9.png" alt="答案"></p>
-<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>没错 这就是传说中的LFI  LFI。。。我又孤陋寡闻了 问问度娘  本地文件包含。。看大佬的blog详解<br><img src="http://i1.fuimg.com/693893/89c6b805c62b5c2d.png" alt><br>暂时还不太了解，等后续了解完 在进行更新这道题目了。</p>
-<h2 id="单身一百年"><a href="#单身一百年" class="headerlink" title="单身一百年"></a>单身一百年</h2><p>又是这个？跟上一道题 那再来抓个包吧<br>OK拿到了<img src="http://i1.fuimg.com/693893/63fa3ef9da79ef6c.png" alt><br>单身一百年的手速不如抓个包啊！</p>
-<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>打开跳转到了百度百科<br>robots协议 锁定<br>Robots协议（也称为爬虫协议、机器人协议等）的全称是“网络爬虫排除标准”（Robots Exclusion Protocol），网站通过Robots协议告诉搜索引擎哪些页面可以抓取，哪些页面不能抓取。<br>前面更新的时候做过这个类型的题<br><img src="http://i1.fuimg.com/693893/538df062df5039c7.png" alt="题目"></p>
-<p>提示sql.php，说明要到这个页面进行操作</p>
-<p>代码信息：</p>
-<p>要用get方法传一个id参数</p>
-<p>但值要为什么呢？注意到了1024这个数字和intval()函数，输进来的数字会经过这个函数的处理</p>
-<p>intval() 函数通过使用指定的进制 base 转换（默认是十进制），返回变量 var 的 integer 数值。<br>输入id=1024，显示‘no！try again’<br>输入id=1023，显示‘no msg in 1023~’<br>输入id=1025，显示‘no more’</p>
-<p>那估计是1024点几</p>
-<p><img src="http://i1.fuimg.com/693893/b2d275e8d57ace9b.png" alt></p>
-<p>这题。。。卡了我大半天。。</p>
-<p>PS：</p>
-<p>1.mysql_connect() 函数打开非持久的 MySQL 连接。</p>
-<p>2.mysql_select_db() 函数设置活动的 MySQL 数据库。</p>
-<p> 如果成功，则该函数返回 true。如果失败，则返回 false。</p>
-<p>3.mysql_fetch_array() 函数从结果集中取得一行作为关联数组，或数字数组，或二者兼有</p>
-<p> 返回根据从结果集取得的行生成的数组，如果没有更多行则返回 false。</p>
-<p>4.mysql_query() 函数执行一条 MySQL 查询。</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 之前进行了SQL注入的学习，这里找到安全龙的实验室进行一波小小的练习。</p>
+<h2 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h2><p>首先进行注入点测试。</p>
+<p><img src="http://i1.fuimg.com/693893/57f9888e8d787cb1.png" alt="练习"><br>一般来说先加一个单引号(英文)，来判断<br><img src="http://i1.fuimg.com/693893/948834b678624def.png" alt><br>这里地址栏自动转化了URL编码<br>输入“   ?id=1’  ”，回显为  “1” limit 0,1，其中1’是我们输入的内容，这时就变成了 ’ ’ 1‘   ‘ limit 0,1‘（蓝色字体为我们输入的内容），原单引号是闭合的（闭合是指，符号成对出现）</p>
+<p>之前是第一个单引号与最后的单引号闭合，第二个单引号与第四个单引号闭合。现在我们输入的内容始终是在两个单引号之间，作为字符串进行处理，所以需要将第二个单引号进行闭合，就在1后面输入一个单引号，并将后面的内容进行注释，输入–+或者%23</p>
+<p><img src="http://i1.fuimg.com/693893/a0b576b3caf49e57.png" alt><br>回显正常</p>
+<p>判断列数</p>
+<p>使用order by（排序），来判断有几列数据，可以先猜猜看</p>
+<p>猜一下应该 不会超过5个先写order by 5，发现回显错误，说明列数是小于5的。<br><img src="http://i1.fuimg.com/693893/715545fff568c2ec.png" alt><br>之后慢慢的往下减少 发现到3时回显正确，说明列数为3<br><img src="http://i1.fuimg.com/693893/163cd9aa52174780.png" alt></p>
+<p>判断显示位（这里我们要将order by删除了 因为列数判断完了）</p>
+<p>使用union联合查询判断显示位。</p>
+<p>首先先使union前面的语句为假，这样就只会显示union后面的查询结果，输入 and 1=2（因为1=2恒为假），或者 id=-1’.</p>
+<p>接着输入union后面的部分，因为union前后查询的字段数量是一样的，所以后面select就需要输入3个字段。<br><img src="http://i1.fuimg.com/693893/a8ff1ce7e7fb9d30.png" alt></p>
+<p>之后就是爆数据库</p>
+<p>使用l连接函数group_concat()，此函数是将括号内字段的字段值以逗号作为分隔符打印在一行。</p>
+<p>MySQL自带四个库，其中information_schema库下存放着数据库对象相关概要信息，比如字符集、引擎、数据库、数据表、视图、列、权限等，其中有重要的三个表，分别是：</p>
+<p>（1）schemata表，存放着MySQL数据库下所有库的信息，show databases命令的结果就是来自于这个表。此表有五列，分别是：</p>
+<p>catalog_name、schema_name、default_character_set_name、default_collation_name、sql_path，其中schema_name列存储的就是MySQL数据库下所有库的名字（爆数据库名用到此表）；</p>
+<p>（2）tables表，此表提供了关于数据库中的表的信息（包括视图），重要的两个列，一是table_schema：表所属数据库的名字，二是table_name：表的名字（爆表名就要用到此表）。</p>
+<p>（3）columns表，此表提供了表中列的信息，详细表述了某张表的所有列以及每个列的信息，重要的三个列，一是table_schema：字段所属数据库的名字，二是table_name：字段所属数据表的名字，三是column_name：字段的名字（用此表爆字段名）。</p>
+<p>所以爆数据库的语句是：</p>
+<p>union select 1,group_concat(schema_name),3 from information_schema</p>
+<p>爆出所有数据表名称<br><img src="http://i1.fuimg.com/693893/e0eab74790748baa.png" alt></p>
+<p>查询我们当前所在的数据库名，我们就用此数据库来爆其他信息。</p>
+<p>使用database()函数，查询当前数据库名称<br><img src="http://i1.fuimg.com/693893/9f4b63d4b8853894.png" alt></p>
+<p>接下来</p>
+<p>爆表名<br>上一篇之前使用过的语句<br>union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’security’<br><img src="http://i1.fuimg.com/693893/3cd6089898d52eae.png" alt><br>发现这些表中有一个users表，user 用户 来搞一波，下一步我们就爆此表的字段。</p>
+<p>爆字段<br>接续<br>union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’users’</p>
+<p><img src="http://i1.fuimg.com/693893/d860e070451f0bb7.png" alt></p>
+<p>这样一下爆数据</p>
+<p>根据以上操作，我们知道了数据库是security，表示users，字段是username及password，所以我们现在就来搞一波用户名和密码。</p>
+<p><img src="http://i1.fuimg.com/693893/1545ad3b213f505f.png" alt></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其中虽然是做完了，中间个人还有语句上的疑问与错误，还需要继续理解一番。还是需要加大练习量 需要继续理解暂时先放这一个。</p>
+<p>PS： 基本流程</p>
+<ol>
+<li>判断注入点 </li>
+<li>判断列数  </li>
+<li>接着爆库 </li>
+<li>爆表</li>
+<li>爆字段  </li>
+<li>接着就爆数据 </li>
+</ol>
 
             </div>
             <hr>
@@ -609,7 +595,7 @@ md5 collision 首先还是先看看题
                     </span>
                     <a href="https://Greypotato.github.io" class="b-link-green">Greypotato</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/19/NYWEB/" class="b-link-green">南邮CTF-WEB-writeup</a>
+                    <a href="/2019/07/21/SQLLX/" class="b-link-green">SQL靶场练习</a>
                 </p>
             </div>
         </div>
@@ -632,7 +618,8 @@ md5 collision 首先还是先看看题
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/07/21/SQLLX/">
                     <div class="card-image">
@@ -648,9 +635,9 @@ md5 collision 首先还是先看看题
 第一关首先进行注入点测试。
 一般来说先加一个单引号(英文)，来判断这里地址栏自动转化了URL编码输入“   ?id=1’  ”，回显为  “1” limit 0,</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-21
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -659,6 +646,7 @@ md5 collision 首先还是先看看题
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -677,20 +665,23 @@ md5 collision 首先还是先看看题
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/17/SQL/">
+                <a href="/2019/07/19/NYWEB/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="SQL注入的学习与个人理解">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="南邮CTF-WEB-writeup">
                         
-                        <span class="card-title">SQL注入的学习与个人理解</span>
+                        <span class="card-title">南邮CTF-WEB-writeup</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">什么是SQL注入攻击刚开始接触未免不清楚什么是SQL注入攻击，SQL注入不同于XSS攻击。SQL注入攻击通过构建特殊的输入作为参数传入Web应用程序，而这些输入大都是SQL语法里的一些组合，就是通过把SQL命令插入到Web表单提交或输入域名</div>
+                    <div class="summary">WEB题签到题  打开界面看到：key在哪里？ 签到题都不会很难，查看源代码。
+
+md5 collision 首先还是先看看题
+题目提示给出了MD5 中间又有 md51=md52 看到前面有QNKCDZO 那么很显然啊 就是找到和‘QNKC</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-17
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-19
                             </span>
                         <span class="publish-author">
                             
@@ -703,8 +694,8 @@ md5 collision 首先还是先看看题
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SQL练习（一）/" target="_blank">
-                        <span class="chip bg-color">SQL练习（一）</span>
+                    <a href="/tags/web练习（一）/" target="_blank">
+                        <span class="chip bg-color">web练习（一）</span>
                     </a>
                     
                 </div>

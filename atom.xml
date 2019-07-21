@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Greypotato.github.io/"/>
-  <updated>2019-07-21T10:17:15.806Z</updated>
+  <updated>2019-07-21T10:59:12.345Z</updated>
   <id>https://Greypotato.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL靶场练习</title>
+    <link href="https://Greypotato.github.io/2019/07/21/SQLLX/"/>
+    <id>https://Greypotato.github.io/2019/07/21/SQLLX/</id>
+    <published>2019-07-21T08:25:03.000Z</published>
+    <updated>2019-07-21T10:59:12.345Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 之前进行了SQL注入的学习，这里找到安全龙的实验室进行一波小小的练习。</p><h2 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h2><p>首先进行注入点测试。</p><p><img src="http://i1.fuimg.com/693893/57f9888e8d787cb1.png" alt="练习"><br>一般来说先加一个单引号(英文)，来判断<br><img src="http://i1.fuimg.com/693893/948834b678624def.png" alt><br>这里地址栏自动转化了URL编码<br>输入“   ?id=1’  ”，回显为  “1” limit 0,1，其中1’是我们输入的内容，这时就变成了 ’ ’ 1‘   ‘ limit 0,1‘（蓝色字体为我们输入的内容），原单引号是闭合的（闭合是指，符号成对出现）</p><p>之前是第一个单引号与最后的单引号闭合，第二个单引号与第四个单引号闭合。现在我们输入的内容始终是在两个单引号之间，作为字符串进行处理，所以需要将第二个单引号进行闭合，就在1后面输入一个单引号，并将后面的内容进行注释，输入–+或者%23</p><p><img src="http://i1.fuimg.com/693893/a0b576b3caf49e57.png" alt><br>回显正常</p><p>判断列数</p><p>使用order by（排序），来判断有几列数据，可以先猜猜看</p><p>猜一下应该 不会超过5个先写order by 5，发现回显错误，说明列数是小于5的。<br><img src="http://i1.fuimg.com/693893/715545fff568c2ec.png" alt><br>之后慢慢的往下减少 发现到3时回显正确，说明列数为3<br><img src="http://i1.fuimg.com/693893/163cd9aa52174780.png" alt></p><p>判断显示位（这里我们要将order by删除了 因为列数判断完了）</p><p>使用union联合查询判断显示位。</p><p>首先先使union前面的语句为假，这样就只会显示union后面的查询结果，输入 and 1=2（因为1=2恒为假），或者 id=-1’.</p><p>接着输入union后面的部分，因为union前后查询的字段数量是一样的，所以后面select就需要输入3个字段。<br><img src="http://i1.fuimg.com/693893/a8ff1ce7e7fb9d30.png" alt></p><p>之后就是爆数据库</p><p>使用l连接函数group_concat()，此函数是将括号内字段的字段值以逗号作为分隔符打印在一行。</p><p>MySQL自带四个库，其中information_schema库下存放着数据库对象相关概要信息，比如字符集、引擎、数据库、数据表、视图、列、权限等，其中有重要的三个表，分别是：</p><p>（1）schemata表，存放着MySQL数据库下所有库的信息，show databases命令的结果就是来自于这个表。此表有五列，分别是：</p><p>catalog_name、schema_name、default_character_set_name、default_collation_name、sql_path，其中schema_name列存储的就是MySQL数据库下所有库的名字（爆数据库名用到此表）；</p><p>（2）tables表，此表提供了关于数据库中的表的信息（包括视图），重要的两个列，一是table_schema：表所属数据库的名字，二是table_name：表的名字（爆表名就要用到此表）。</p><p>（3）columns表，此表提供了表中列的信息，详细表述了某张表的所有列以及每个列的信息，重要的三个列，一是table_schema：字段所属数据库的名字，二是table_name：字段所属数据表的名字，三是column_name：字段的名字（用此表爆字段名）。</p><p>所以爆数据库的语句是：</p><p>union select 1,group_concat(schema_name),3 from information_schema</p><p>爆出所有数据表名称<br><img src="http://i1.fuimg.com/693893/e0eab74790748baa.png" alt></p><p>查询我们当前所在的数据库名，我们就用此数据库来爆其他信息。</p><p>使用database()函数，查询当前数据库名称<br><img src="http://i1.fuimg.com/693893/9f4b63d4b8853894.png" alt></p><p>接下来</p><p>爆表名<br>上一篇之前使用过的语句<br>union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’security’<br><img src="http://i1.fuimg.com/693893/3cd6089898d52eae.png" alt><br>发现这些表中有一个users表，user 用户 来搞一波，下一步我们就爆此表的字段。</p><p>爆字段<br>接续<br>union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’users’</p><p><img src="http://i1.fuimg.com/693893/d860e070451f0bb7.png" alt></p><p>这样一下爆数据</p><p>根据以上操作，我们知道了数据库是security，表示users，字段是username及password，所以我们现在就来搞一波用户名和密码。</p><p><img src="http://i1.fuimg.com/693893/1545ad3b213f505f.png" alt></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其中虽然是做完了，中间个人还有语句上的疑问与错误，还需要继续理解一番。还是需要加大练习量 需要继续理解暂时先放这一个。</p><p>PS： 基本流程</p><ol><li>判断注入点 </li><li>判断列数  </li><li>接着爆库 </li><li>爆表</li><li>爆字段  </li><li>接着就爆数据 </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt; 之前进行了SQL注入的学习，这里找到安全龙的实验室进行一波小小的练习。&lt;/p&gt;
+&lt;h2 id=&quot;第一关&quot;&gt;&lt;a href=&quot;#第一关&quot; c
+      
+    
+    </summary>
+    
+    
+      <category term="SQL二）" scheme="https://Greypotato.github.io/tags/SQL%E4%BA%8C%EF%BC%89/"/>
+    
+  </entry>
   
   <entry>
     <title>南邮CTF-WEB-writeup</title>
