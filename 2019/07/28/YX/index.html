@@ -4,10 +4,12 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="南邮CTF web练习, Greypotato">
-    <meta name="description" content="前言 还是南邮的一些题，比较基础的。仍然需要学习一些web知识，上次做着做着 因为证书的问题burp还没有解决。。正在努力尝试解决这个问题。。。这次估计用到burp 的题 还是动不了了。。。
-web1：/0xx
-点开题目链接后发现是代码审计">
+    <meta name="keywords" content="隐写（一）, Greypotato">
+    <meta name="description" content="前言之前做的隐写题，再来巩固学习一下。
+欢迎来到地狱打开文件看到三个文件。。
+打开发现文件无法显示那就丢到winhex
+文件头出现错误。那就修补一下 文件头少了FF D8 FF E1 依次添加上去得到新的图片
+https://pan.bai">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +17,7 @@ web1：/0xx
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>南邮CTF web练习 | Greypotato</title>
+    <title>隐写（一） | Greypotato</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -259,13 +261,13 @@ web1：/0xx
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        南邮CTF web练习
+                        隐写（一）
                     </div>
                 </div>
             </div>
@@ -376,8 +378,8 @@ web1：/0xx
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/web（二）/" target="_blank">
-                                <span class="chip bg-color">web（二）</span>
+                            <a href="/tags/实验吧隐写术/" target="_blank">
+                                <span class="chip bg-color">实验吧隐写术</span>
                             </a>
                         
                     </div>
@@ -391,7 +393,7 @@ web1：/0xx
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-26
+                    2019-07-28
                 </div>
 
                 
@@ -407,55 +409,56 @@ web1：/0xx
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 还是南邮的一些题，比较基础的。仍然需要学习一些web知识，上次做着做着 因为证书的问题burp还没有解决。。正在努力尝试解决这个问题。。。这次估计用到burp 的题 还是动不了了。。。</p>
-<h2 id="web1：-0xx"><a href="#web1：-0xx" class="headerlink" title="web1：/0xx"></a>web1：/0xx</h2><p><img src="http://i1.fuimg.com/693893/daa25c2d9264505b.png" alt="题目"></p>
-<p>点开题目链接后发现是代码审计….题目提示有多种的做法，先看看代码。发现有个ereg函数跟strops函数<br>不太明白这两个函数的作用去看了看</p>
-<p>PHP 函数 ereg()<br>语法</p>
-<pre><code>`int ereg(string pattern, string originalstring, [array regs])
-</code></pre><p>定义和用途`</p>
-<p>ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false。搜索字母的字符是大小写敏感的。</p>
-<p>可选的输入参数规则包含一个数组的所有匹配表达式,他们被正则表达式的括号分组。</p>
-<p>Return Value</p>
-<p>如果匹配成功返回true,否则,则返回false</p>
-<p>还发现了一篇文章：<a href="https://www.jianshu.com/p/7b732d4b8eac" target="_blank" rel="noopener">https://www.jianshu.com/p/7b732d4b8eac</a> </p>
-<p>发现ereg函数有截断漏洞ereg函数存在NULL截断漏洞，导致了正则过滤被绕过,所以可以使用%00截断正则匹配，发现文章中例子跟这道题目用的函数基本一致<br><img src="http://i1.fuimg.com/693893/91b62289710775fb.png" alt="例子"><br>也就是说nctf变量必须是数字，当遇到%00(NULL)时，函数就截止了。</p>
-<p>还有一个函数strpos() 函数查找 “php” 在字符串中第一次出现的位置：</p>
-<p>定义和用法<br>strpos() 函数查找字符串在另一字符串中第一次出现的位置。</p>
-<p>strpos() 函数对大小写敏感。<br>这在题目中就是strpos ($_GET[‘nctf’], ‘#biubiubiu’)函数要求nctf变量中需要包含’#biubiubiu’字符串，才能返回。</p>
-<p>了解完来试试<br>不会的函数还是问问度娘好使。。最终拿到flag<img src="http://i1.fuimg.com/693893/d9f4b07797d4f9dc.png" alt></p>
-<h2 id="web2：bypass-again"><a href="#web2：bypass-again" class="headerlink" title="web2：bypass again"></a>web2：bypass again</h2><p>点进去 发现好像还是代码审计<img src="http://i1.fuimg.com/693893/04b57bc1ef16ba15.png" alt><br>get一个变量 </p>
-<p>还有isset函数</p>
-<p>定义和用法<br>isset() 函数用于检测变量是否已设置并且非 NULL。</p>
-<p>如果已经使用 unset() 释放了一个变量之后，再通过 isset() 判断将返回 FALSE。</p>
-<p>若使用 isset() 测试一个被设置成 NULL 的变量，将返回 FALSE。</p>
-<p>同时要注意的是 null 字符（”\0”）并不等同于 PHP 的 NULL 常量。这里应该是设置isset检测ab不为空</p>
-<p>再看发现代码的意思是让两个不一样的数使他们的md5相等，md5()函数要求接收一个字符串，若传递进去一个数组，则会返回null（加了‘ ’就相当于字符串的代表了）</p>
-<p>因此向$_GET数组传入两个名为a、b的不相等的数组，从而导致md5()均返回空输出信息 退出脚本。<br>这种题前面有类似，考察md5碰撞，只要md5值开头为0ed， ==会认为两边都为0，即为true这样就好弄了根据前面的题a=240610708&amp;b=QNKCDZO 还可以?a[]=&amp;b[]=1 这样比较简单 这是因为md5不能处理数组结构的数据。出错返回的空NULL==NULL</p>
-<p><img src="http://i1.fuimg.com/693893/d9f8fd56f1227da9.png" alt></p>
-<h2 id="web3-变量覆盖"><a href="#web3-变量覆盖" class="headerlink" title="web3:变量覆盖"></a>web3:变量覆盖</h2><p> 看到一个输入框，难不成是XSS或者SQL注入的类型题目吗<br><img src="http://i1.fuimg.com/693893/8c209c9ab8420ffb.png" alt><br>题目说是变量覆盖  先找到相关的看看基础知识。<br>原来还是代码审计的相关知识里面的<br><a href="https://www.freebuf.com/column/150731.html" target="_blank" rel="noopener">代码审计|变量覆盖漏洞</a></p>
-<p><a href="https://www.cnblogs.com/sqyysec/p/6926095.html" target="_blank" rel="noopener">【代码审计】变量覆盖漏洞详解</a></p>
-<p>那之后来干一波。<br>映入眼帘的 还是一大波代码<img src="http://i1.fuimg.com/693893/a8eb99c945280578.png" alt>果然还是代码审计</p>
-<p><img src="http://i1.fuimg.com/693893/3f88edf4e736e0dc.png" alt>$password 等于$thepassword_123就能够得到flag了<br>这样构造一下得到flag<br><img src="http://i1.fuimg.com/693893/5206a723af3c59de.png" alt></p>
-<h2 id="web4-php是世界上最好的语言"><a href="#web4-php是世界上最好的语言" class="headerlink" title="web4:php是世界上最好的语言"></a>web4:php是世界上最好的语言</h2><p>好像题目崩了 <img src="http://i1.fuimg.com/693893/b3d2c6dae1df094b.png" alt><br>等等看再写。</p>
-<h2 id="web-5伪装者"><a href="#web-5伪装者" class="headerlink" title="web:5伪装者"></a>web:5伪装者</h2><p><img src="http://i1.fuimg.com/693893/e21a13b9809d64ff.png" alt><br>告诉我不是本地登录 然后只有本地  题目又是伪装者 看来是伪造IP 应该可以抓包改包 来过 可是burp暂时不能用， 试试火狐的软件</p>
-<p><img src="http://i1.fuimg.com/693893/f6c12b0df1b767f3.png" alt><br>  。。。不知道为啥 这样保存后不让用，，，暂时没了思路 等正好burp再来战。这样伪造应该也是可行的。</p>
-<h2 id="web6-SQL注入1"><a href="#web6-SQL注入1" class="headerlink" title="web6:SQL注入1"></a>web6:SQL注入1</h2><p><img src="http://i1.fuimg.com/693893/11e999cb16809470.png" alt><br>点进去 看账号密码都有提交白 看看有啥信息<br>Secure Web Login<br>You are not admin!</p>
-<p>告诉我不是admin  那就再点开Source<br><img src="http://i1.fuimg.com/693893/0e2b6a23656d68ea.png" alt><br>看到重点  <img src="http://i1.fuimg.com/693893/dbfd015dabbaab3d.png" alt><br>不是说好的注入吗  突然有了审计的味道。</p>
-<p>1框说明 user 是 admin，所以要想办法避免密码的验证</p>
-<p>在2中：$sql=”select user from ctf where (user=’”.$user.”‘) and (pw=’”.$pass.”‘)”</p>
-<p>我们通过审计发现注入点    在(user=’”.$user.”‘)做手脚，在Username处输入 admin’)#</p>
-<p>输入 admin’）# </p>
-<p>因为后面的语句被#注释了，要把源码原来的）补上。<br><img src="http://i1.fuimg.com/693893/31d785d8affbfbea.png" alt></p>
-<h2 id="web7-pass-check"><a href="#web7-pass-check" class="headerlink" title="web7: pass check"></a>web7: pass check</h2><p>打开就是源码<br><img src="http://i1.fuimg.com/693893/5c041ed4c3c285e6.png" alt></p>
-<p>看源码只要(!strcmp($pass,$pass1))条件成立就可得到flag。</p>
-<p>strcmp()是用于比较字符串的函数</p>
-<p>定义：</p>
-<p>int strcmp ( string $str1 , string $str2 )<br>参数 str1第一个字符串。str2第二个字符串。<br>如果 str1 小于 str2 返回 &lt; 0；<br>如果 str1 大于 str2 返回 &gt; 0；<br>如果两者相等，返回 0。</p>
-<p>因此尝试数组绕过,只要我们$_POST[‘pass’]是一个数组或者一个对象就搞定了。<br><img src="http://i1.fuimg.com/693893/fee8114e4af43cfd.png" alt></p>
-<h2 id="web8-起名字真难"><a href="#web8-起名字真难" class="headerlink" title="web8:起名字真难"></a>web8:起名字真难</h2><p> 。。题目挺有意思 不过起名字确实很难<br><img src="http://i1.fuimg.com/693893/1fe287cb034968ac.png" alt><br>看看代码 nother_says_correct 没有其他精确的方法？/?…先往下看 百度这个给了我一个是数字验证正则绕过的类型题目，继续看 题目告诉我们是 输入key，key的值需要等于54975581388，但是key的每一位数字不能是1-9</p>
-<p>ord()函数返回字符串的首个字符的 ASCII 值。</p>
-<p>不让输入数字还让等于54975581388  这进制转化白 转化成16进制0xccccccccc<br><img src="http://i1.fuimg.com/693893/1c10115b268a73e1.png" alt><br>得到flag</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p> 暂时做到这，对代码审计又有了进一步的认识。</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前做的隐写题，再来巩固学习一下。</p>
+<h2 id="欢迎来到地狱"><a href="#欢迎来到地狱" class="headerlink" title="欢迎来到地狱"></a>欢迎来到地狱</h2><p>打开文件看到三个文件。。<br><img src="http://i2.tiimg.com/693893/e9929589831885f3.png" alt></p>
+<p>打开发现文件无法显示那就丢到winhex<br><img src="http://i2.tiimg.com/693893/2530406c52b6b273.png" alt></p>
+<p>文件头出现错误。<br><img src="http://i2.tiimg.com/693893/97476b1eaba97585.png" alt><br>那就修补一下 文件头少了FF D8 FF E1 依次添加上去<br>得到新的图片<br><img src="http://i2.tiimg.com/693893/62f59683b14fa75e.png" alt></p>
+<p><code>https://pan.baidu.com/s/1i49Jhlj</code>得到地址</p>
+<p>用软件打开<img src="http://i2.tiimg.com/693893/efba72d067bb392a.png" alt></p>
+<p>好像是摩斯密码<br>长方形-小圆点。横线应该是空格 得到一串摩斯密码</p>
+<p>-.- . -.– .-.. . - ..- … –. —<br>解密试试<img src="http://i2.tiimg.com/693893/11a3be31b1e48d1f.png" alt></p>
+<p>得到字符key let us go 没了？打开第二个文档 有密码 那么</p>
+<p>第二层的word文档的密码就是letusgo，</p>
+<p>用密码letusgo打开文档发现<br><img src="http://i2.tiimg.com/693893/ecc35d096003fd22.png" alt><br>之前设置过显示隐藏文字 所以这里直接显示出来了 下面明显的有线条 这是隐藏文字的提示</p>
+<p>提示我图片 然后图片隐写？试试解密</p>
+<p>用之前收集的在线解（这里。。我用自己的工具没解开 用了网上的）<br><img src="http://i2.tiimg.com/693893/20c37d63210e37b3.png" alt></p>
+<p>这应该是下一层的密码key{you are in finally hell now}<br><img src="http://i2.tiimg.com/693893/5d26af930675fdda.png" alt><br>一串二进制</p>
+<pre><code>01110010011101010110111101101011011011110111010101101100011010010110111001100111
+</code></pre><p> 八个为一组进行转换</p>
+<p><img src="http://i2.tiimg.com/693893/ee4aea975d11aaf8.png" alt></p>
+<p><img src="http://i2.tiimg.com/693893/e349c2584c8952ff.png" alt></p>
+<p>ruokouling????怀疑图片不单纯 放到winhex 发现里面是有东西 是个压缩包  改后缀ZIP 果然有东西得到密码Password</p>
+<p>解压后是一个txt，打开有一段密码</p>
+<p><img src="http://i2.tiimg.com/693893/4efdc814cd93edee.png" alt></p>
+<p>凯撒家族 凯撒密码??? 兔子洞穴？？？  sixfour    Base64 + rabbit？？？？？</p>
+<p>试试</p>
+<p>首先对</p>
+<p>VTJGc2RHVmtYMTlwRG9yWjJoVFArNXcwelNBOWJYaFZlekp5MnVtRlRTcDZQZE42elBLQ01BPT0=<br> 进行base64解密，得到</p>
+<p>U2FsdGVkX19pDorZ2hTP+5w0zSA9bXhVezJy2umFTSp6PdN6zPKCMA==<br> 再进行Rabbit解密，得到</p>
+<p>fxbqrwrvnwmngrjxsrnsrnhx<br> 最后进行凯撒密码的解密，<br><img src="http://i2.tiimg.com/693893/41c730318cd49b68.png" alt></p>
+<p>。。。终于拿到flag</p>
+<h2 id="so-beautiful-so-white"><a href="#so-beautiful-so-white" class="headerlink" title="so beautiful so white"></a>so beautiful so white</h2><p>题目提示：压缩包的密码在白色图片中</p>
+<p><img src="http://i2.tiimg.com/693893/bab7cde585c89586.png" alt></p>
+<p>white.zip文件中有两个文件<br>应该是白色的图片中又有东西<br><img src="http://i2.tiimg.com/693893/a9c029bd95be9620.png" alt></p>
+<p>这个key应该就是zip.zip的解压密码</p>
+<p>里面有个a.gif，但是不能正常显示<br><img src="http://i2.tiimg.com/693893/7e87e441c86d12c3.png" alt></p>
+<p>前面的GIF8没有了，把文件头补上去，47 49 46 38</p>
+<p>打开gif动图可以看到一个小熊，然后一串字符串一闪而过<br><img src="http://i2.tiimg.com/693893/5a74031e6346de58.png" alt><br>然后PS打开看图层最终得到flag，CTF{AS3X}</p>
+<h2 id="打不开的文件"><a href="#打不开的文件" class="headerlink" title="打不开的文件"></a>打不开的文件</h2><p>看题目名，估计就是和文件头有关</p>
+<p>gif文件打不开<br>应该还是文件头 再看看<br><img src="http://i2.tiimg.com/693893/107355c2382cb7d2.png" alt></p>
+<p>果然文件头少了47 49 46 38，补上去</p>
+<p>补完之后打开动图，key在动图的帧中</p>
+<p>用PS打开，得到一串字符串：dGhpcyBpcyBhlGdpZg==</p>
+<p>base64解密一下得到flag，this is a gif</p>
+<h2 id="Fonts"><a href="#Fonts" class="headerlink" title="Fonts"></a>Fonts</h2><p>下载文档，打开，得到flag<br><img src="http://i2.tiimg.com/693893/49514a60f434b1f8.png" alt><br>这个拿到的太简单了。。。。试试还真是</p>
+<h2 id="想看正面？那就要看仔细了！"><a href="#想看正面？那就要看仔细了！" class="headerlink" title="想看正面？那就要看仔细了！"></a>想看正面？那就要看仔细了！</h2><p>下载图片<br><img src="http://i2.tiimg.com/693893/46ce844a96bede7b.png" alt><br>图片丢尽winhex 找了一番没东西 是不是隐写 图片网站解一下。 再用Stegsolve.jar 看一下 还没东西？？？？  这可有点不对劲了 看看winhex  格式也对 里面也没有东西啊。。。</p>
+<p>最后 看看属性。。。噗。。。还真是。。。。再属性里 没想到</p>
+<p><img src="http://i2.tiimg.com/693893/7183e886f1684dbf.png" alt><br>这谁顶得住。。。</p>
+<p>base64解码一下，得到flag beauty</p>
+<h2 id="无处不在的广告"><a href="#无处不在的广告" class="headerlink" title="无处不在的广告"></a>无处不在的广告</h2><p>下载下来，是个图片  有了上次的教训啊  先看看属性 </p>
+<p>好的这次没有东西再放到 winhex中 也没啥缺少的 而且图片打的卡 再看看Stegsolve.jar</p>
+<p><img src="http://i2.tiimg.com/693893/7705d44718b78321.png" alt><br>翻翻看看 找到了！</p>
+<p>微信扫码 FLAG: this is a new word<br>OK</p>
 
             </div>
             <hr>
@@ -603,7 +606,7 @@ web1：/0xx
                     </span>
                     <a href="https://Greypotato.github.io" class="b-link-green">Greypotato</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/26/web2/" class="b-link-green">南邮CTF web练习</a>
+                    <a href="/2019/07/28/YX/" class="b-link-green">隐写（一）</a>
                 </p>
             </div>
         </div>
@@ -626,7 +629,8 @@ web1：/0xx
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/07/28/YX/">
                     <div class="card-image">
@@ -644,9 +648,9 @@ web1：/0xx
 文件头出现错误。那就修补一下 文件头少了FF D8 FF E1 依次添加上去得到新的图片
 https://pan.bai</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -655,6 +659,7 @@ https://pan.bai</div>
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -673,22 +678,22 @@ https://pan.bai</div>
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/21/SQLLX/">
+                <a href="/2019/07/26/web2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="SQL靶场练习">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="南邮CTF web练习">
                         
-                        <span class="card-title">SQL靶场练习</span>
+                        <span class="card-title">南邮CTF web练习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">前言 之前进行了SQL注入的学习，这里找到安全龙的实验室进行一波小小的练习。
-第一关首先进行注入点测试。
-一般来说先加一个单引号(英文)，来判断这里地址栏自动转化了URL编码输入“   ?id=1’  ”，回显为  “1” limit 0,</div>
+                    <div class="summary">前言 还是南邮的一些题，比较基础的。仍然需要学习一些web知识，上次做着做着 因为证书的问题burp还没有解决。。正在努力尝试解决这个问题。。。这次估计用到burp 的题 还是动不了了。。。
+web1：/0xx
+点开题目链接后发现是代码审计</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-21
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-26
                             </span>
                         <span class="publish-author">
                             
@@ -701,8 +706,8 @@ https://pan.bai</div>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SQL二）/" target="_blank">
-                        <span class="chip bg-color">SQL二）</span>
+                    <a href="/tags/web（二）/" target="_blank">
+                        <span class="chip bg-color">web（二）</span>
                     </a>
                     
                 </div>

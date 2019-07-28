@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Greypotato.github.io/"/>
-  <updated>2019-07-28T04:52:17.574Z</updated>
+  <updated>2019-07-28T09:04:14.116Z</updated>
   <id>https://Greypotato.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>隐写（一）</title>
+    <link href="https://Greypotato.github.io/2019/07/28/YX/"/>
+    <id>https://Greypotato.github.io/2019/07/28/YX/</id>
+    <published>2019-07-28T04:38:43.000Z</published>
+    <updated>2019-07-28T09:04:14.116Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前做的隐写题，再来巩固学习一下。</p><h2 id="欢迎来到地狱"><a href="#欢迎来到地狱" class="headerlink" title="欢迎来到地狱"></a>欢迎来到地狱</h2><p>打开文件看到三个文件。。<br><img src="http://i2.tiimg.com/693893/e9929589831885f3.png" alt></p><p>打开发现文件无法显示那就丢到winhex<br><img src="http://i2.tiimg.com/693893/2530406c52b6b273.png" alt></p><p>文件头出现错误。<br><img src="http://i2.tiimg.com/693893/97476b1eaba97585.png" alt><br>那就修补一下 文件头少了FF D8 FF E1 依次添加上去<br>得到新的图片<br><img src="http://i2.tiimg.com/693893/62f59683b14fa75e.png" alt></p><p><code>https://pan.baidu.com/s/1i49Jhlj</code>得到地址</p><p>用软件打开<img src="http://i2.tiimg.com/693893/efba72d067bb392a.png" alt></p><p>好像是摩斯密码<br>长方形-小圆点。横线应该是空格 得到一串摩斯密码</p><p>-.- . -.– .-.. . - ..- … –. —<br>解密试试<img src="http://i2.tiimg.com/693893/11a3be31b1e48d1f.png" alt></p><p>得到字符key let us go 没了？打开第二个文档 有密码 那么</p><p>第二层的word文档的密码就是letusgo，</p><p>用密码letusgo打开文档发现<br><img src="http://i2.tiimg.com/693893/ecc35d096003fd22.png" alt><br>之前设置过显示隐藏文字 所以这里直接显示出来了 下面明显的有线条 这是隐藏文字的提示</p><p>提示我图片 然后图片隐写？试试解密</p><p>用之前收集的在线解（这里。。我用自己的工具没解开 用了网上的）<br><img src="http://i2.tiimg.com/693893/20c37d63210e37b3.png" alt></p><p>这应该是下一层的密码key{you are in finally hell now}<br><img src="http://i2.tiimg.com/693893/5d26af930675fdda.png" alt><br>一串二进制</p><pre><code>01110010011101010110111101101011011011110111010101101100011010010110111001100111</code></pre><p> 八个为一组进行转换</p><p><img src="http://i2.tiimg.com/693893/ee4aea975d11aaf8.png" alt></p><p><img src="http://i2.tiimg.com/693893/e349c2584c8952ff.png" alt></p><p>ruokouling????怀疑图片不单纯 放到winhex 发现里面是有东西 是个压缩包  改后缀ZIP 果然有东西得到密码Password</p><p>解压后是一个txt，打开有一段密码</p><p><img src="http://i2.tiimg.com/693893/4efdc814cd93edee.png" alt></p><p>凯撒家族 凯撒密码??? 兔子洞穴？？？  sixfour    Base64 + rabbit？？？？？</p><p>试试</p><p>首先对</p><p>VTJGc2RHVmtYMTlwRG9yWjJoVFArNXcwelNBOWJYaFZlekp5MnVtRlRTcDZQZE42elBLQ01BPT0=<br> 进行base64解密，得到</p><p>U2FsdGVkX19pDorZ2hTP+5w0zSA9bXhVezJy2umFTSp6PdN6zPKCMA==<br> 再进行Rabbit解密，得到</p><p>fxbqrwrvnwmngrjxsrnsrnhx<br> 最后进行凯撒密码的解密，<br><img src="http://i2.tiimg.com/693893/41c730318cd49b68.png" alt></p><p>。。。终于拿到flag</p><h2 id="so-beautiful-so-white"><a href="#so-beautiful-so-white" class="headerlink" title="so beautiful so white"></a>so beautiful so white</h2><p>题目提示：压缩包的密码在白色图片中</p><p><img src="http://i2.tiimg.com/693893/bab7cde585c89586.png" alt></p><p>white.zip文件中有两个文件<br>应该是白色的图片中又有东西<br><img src="http://i2.tiimg.com/693893/a9c029bd95be9620.png" alt></p><p>这个key应该就是zip.zip的解压密码</p><p>里面有个a.gif，但是不能正常显示<br><img src="http://i2.tiimg.com/693893/7e87e441c86d12c3.png" alt></p><p>前面的GIF8没有了，把文件头补上去，47 49 46 38</p><p>打开gif动图可以看到一个小熊，然后一串字符串一闪而过<br><img src="http://i2.tiimg.com/693893/5a74031e6346de58.png" alt><br>然后PS打开看图层最终得到flag，CTF{AS3X}</p><h2 id="打不开的文件"><a href="#打不开的文件" class="headerlink" title="打不开的文件"></a>打不开的文件</h2><p>看题目名，估计就是和文件头有关</p><p>gif文件打不开<br>应该还是文件头 再看看<br><img src="http://i2.tiimg.com/693893/107355c2382cb7d2.png" alt></p><p>果然文件头少了47 49 46 38，补上去</p><p>补完之后打开动图，key在动图的帧中</p><p>用PS打开，得到一串字符串：dGhpcyBpcyBhlGdpZg==</p><p>base64解密一下得到flag，this is a gif</p><h2 id="Fonts"><a href="#Fonts" class="headerlink" title="Fonts"></a>Fonts</h2><p>下载文档，打开，得到flag<br><img src="http://i2.tiimg.com/693893/49514a60f434b1f8.png" alt><br>这个拿到的太简单了。。。。试试还真是</p><h2 id="想看正面？那就要看仔细了！"><a href="#想看正面？那就要看仔细了！" class="headerlink" title="想看正面？那就要看仔细了！"></a>想看正面？那就要看仔细了！</h2><p>下载图片<br><img src="http://i2.tiimg.com/693893/46ce844a96bede7b.png" alt><br>图片丢尽winhex 找了一番没东西 是不是隐写 图片网站解一下。 再用Stegsolve.jar 看一下 还没东西？？？？  这可有点不对劲了 看看winhex  格式也对 里面也没有东西啊。。。</p><p>最后 看看属性。。。噗。。。还真是。。。。再属性里 没想到</p><p><img src="http://i2.tiimg.com/693893/7183e886f1684dbf.png" alt><br>这谁顶得住。。。</p><p>base64解码一下，得到flag beauty</p><h2 id="无处不在的广告"><a href="#无处不在的广告" class="headerlink" title="无处不在的广告"></a>无处不在的广告</h2><p>下载下来，是个图片  有了上次的教训啊  先看看属性 </p><p>好的这次没有东西再放到 winhex中 也没啥缺少的 而且图片打的卡 再看看Stegsolve.jar</p><p><img src="http://i2.tiimg.com/693893/7705d44718b78321.png" alt><br>翻翻看看 找到了！</p><p>微信扫码 FLAG: this is a new word<br>OK</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;之前做的隐写题，再来巩固学习一下。&lt;/p&gt;
+&lt;h2 id=&quot;欢迎来到地狱&quot;&gt;&lt;a href=&quot;#欢迎来到地狱&quot; class=&quot;headerl
+      
+    
+    </summary>
+    
+    
+      <category term="实验吧隐写术" scheme="https://Greypotato.github.io/tags/%E5%AE%9E%E9%AA%8C%E5%90%A7%E9%9A%90%E5%86%99%E6%9C%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>南邮CTF web练习</title>
