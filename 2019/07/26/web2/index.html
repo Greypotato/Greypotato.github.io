@@ -4,10 +4,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="SQL靶场练习, Greypotato">
-    <meta name="description" content="前言 之前进行了SQL注入的学习，这里找到安全龙的实验室进行一波小小的练习。
-第一关首先进行注入点测试。
-一般来说先加一个单引号(英文)，来判断这里地址栏自动转化了URL编码输入“   ?id=1’  ”，回显为  “1” limit 0,">
+    <meta name="keywords" content="南邮CTF web练习, Greypotato">
+    <meta name="description" content="前言 还是南邮的一些题，比较基础的。仍然需要学习一些web知识，上次做着做着 因为证书的问题burp还没有解决。。正在努力尝试解决这个问题。。。这次估计用到burp 的题 还是动不了了。。。
+web1：/0xx
+点开题目链接后发现是代码审计">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SQL靶场练习 | Greypotato</title>
+    <title>南邮CTF web练习 | Greypotato</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -259,13 +259,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        SQL靶场练习
+                        南邮CTF web练习
                     </div>
                 </div>
             </div>
@@ -376,8 +376,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/SQL二）/" target="_blank">
-                                <span class="chip bg-color">SQL二）</span>
+                            <a href="/tags/web（二）/" target="_blank">
+                                <span class="chip bg-color">web（二）</span>
                             </a>
                         
                     </div>
@@ -391,7 +391,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-07-21
+                    2019-07-26
                 </div>
 
                 
@@ -407,47 +407,55 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 之前进行了SQL注入的学习，这里找到安全龙的实验室进行一波小小的练习。</p>
-<h2 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h2><p>首先进行注入点测试。</p>
-<p><img src="http://i1.fuimg.com/693893/57f9888e8d787cb1.png" alt="练习"><br>一般来说先加一个单引号(英文)，来判断<br><img src="http://i1.fuimg.com/693893/948834b678624def.png" alt><br>这里地址栏自动转化了URL编码<br>输入“   ?id=1’  ”，回显为  “1” limit 0,1，其中1’是我们输入的内容，这时就变成了 ’ ’ 1‘   ‘ limit 0,1‘（蓝色字体为我们输入的内容），原单引号是闭合的（闭合是指，符号成对出现）</p>
-<p>之前是第一个单引号与最后的单引号闭合，第二个单引号与第四个单引号闭合。现在我们输入的内容始终是在两个单引号之间，作为字符串进行处理，所以需要将第二个单引号进行闭合，就在1后面输入一个单引号，并将后面的内容进行注释，输入–+或者%23</p>
-<p><img src="http://i1.fuimg.com/693893/a0b576b3caf49e57.png" alt><br>回显正常</p>
-<p>判断列数</p>
-<p>使用order by（排序），来判断有几列数据，可以先猜猜看</p>
-<p>猜一下应该 不会超过5个先写order by 5，发现回显错误，说明列数是小于5的。<br><img src="http://i1.fuimg.com/693893/715545fff568c2ec.png" alt><br>之后慢慢的往下减少 发现到3时回显正确，说明列数为3<br><img src="http://i1.fuimg.com/693893/163cd9aa52174780.png" alt></p>
-<p>判断显示位（这里我们要将order by删除了 因为列数判断完了）</p>
-<p>使用union联合查询判断显示位。</p>
-<p>首先先使union前面的语句为假，这样就只会显示union后面的查询结果，输入 and 1=2（因为1=2恒为假），或者 id=-1’.</p>
-<p>接着输入union后面的部分，因为union前后查询的字段数量是一样的，所以后面select就需要输入3个字段。<br><img src="http://i1.fuimg.com/693893/a8ff1ce7e7fb9d30.png" alt></p>
-<p>之后就是爆数据库</p>
-<p>使用l连接函数group_concat()，此函数是将括号内字段的字段值以逗号作为分隔符打印在一行。</p>
-<p>MySQL自带四个库，其中information_schema库下存放着数据库对象相关概要信息，比如字符集、引擎、数据库、数据表、视图、列、权限等，其中有重要的三个表，分别是：</p>
-<p>（1）schemata表，存放着MySQL数据库下所有库的信息，show databases命令的结果就是来自于这个表。此表有五列，分别是：</p>
-<p>catalog_name、schema_name、default_character_set_name、default_collation_name、sql_path，其中schema_name列存储的就是MySQL数据库下所有库的名字（爆数据库名用到此表）；</p>
-<p>（2）tables表，此表提供了关于数据库中的表的信息（包括视图），重要的两个列，一是table_schema：表所属数据库的名字，二是table_name：表的名字（爆表名就要用到此表）。</p>
-<p>（3）columns表，此表提供了表中列的信息，详细表述了某张表的所有列以及每个列的信息，重要的三个列，一是table_schema：字段所属数据库的名字，二是table_name：字段所属数据表的名字，三是column_name：字段的名字（用此表爆字段名）。</p>
-<p>所以爆数据库的语句是：</p>
-<p>union select 1,group_concat(schema_name),3 from information_schema</p>
-<p>爆出所有数据表名称<br><img src="http://i1.fuimg.com/693893/e0eab74790748baa.png" alt></p>
-<p>查询我们当前所在的数据库名，我们就用此数据库来爆其他信息。</p>
-<p>使用database()函数，查询当前数据库名称<br><img src="http://i1.fuimg.com/693893/9f4b63d4b8853894.png" alt></p>
-<p>接下来</p>
-<p>爆表名<br>上一篇之前使用过的语句<br>union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=’security’<br><img src="http://i1.fuimg.com/693893/3cd6089898d52eae.png" alt><br>发现这些表中有一个users表，user 用户 来搞一波，下一步我们就爆此表的字段。</p>
-<p>爆字段<br>接续<br>union select 1,group_concat(column_name),3 from information_schema.columns where table_name=’users’</p>
-<p><img src="http://i1.fuimg.com/693893/d860e070451f0bb7.png" alt></p>
-<p>这样一下爆数据</p>
-<p>根据以上操作，我们知道了数据库是security，表示users，字段是username及password，所以我们现在就来搞一波用户名和密码。</p>
-<p><img src="http://i1.fuimg.com/693893/1545ad3b213f505f.png" alt></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其中虽然是做完了，中间个人还有语句上的疑问与错误，还需要继续理解一番。还是需要加大练习量 需要继续理解暂时先放这一个。</p>
-<p>PS： 基本流程</p>
-<ol>
-<li>判断注入点 </li>
-<li>判断列数  </li>
-<li>接着爆库 </li>
-<li>爆表</li>
-<li>爆字段  </li>
-<li>接着就爆数据 </li>
-</ol>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 还是南邮的一些题，比较基础的。仍然需要学习一些web知识，上次做着做着 因为证书的问题burp还没有解决。。正在努力尝试解决这个问题。。。这次估计用到burp 的题 还是动不了了。。。</p>
+<h2 id="web1：-0xx"><a href="#web1：-0xx" class="headerlink" title="web1：/0xx"></a>web1：/0xx</h2><p><img src="http://i1.fuimg.com/693893/daa25c2d9264505b.png" alt="题目"></p>
+<p>点开题目链接后发现是代码审计….题目提示有多种的做法，先看看代码。发现有个ereg函数跟strops函数<br>不太明白这两个函数的作用去看了看</p>
+<p>PHP 函数 ereg()<br>语法</p>
+<pre><code>`int ereg(string pattern, string originalstring, [array regs])
+</code></pre><p>定义和用途`</p>
+<p>ereg()函数用指定的模式搜索一个字符串中指定的字符串,如果匹配成功返回true,否则,则返回false。搜索字母的字符是大小写敏感的。</p>
+<p>可选的输入参数规则包含一个数组的所有匹配表达式,他们被正则表达式的括号分组。</p>
+<p>Return Value</p>
+<p>如果匹配成功返回true,否则,则返回false</p>
+<p>还发现了一篇文章：<a href="https://www.jianshu.com/p/7b732d4b8eac" target="_blank" rel="noopener">https://www.jianshu.com/p/7b732d4b8eac</a> </p>
+<p>发现ereg函数有截断漏洞ereg函数存在NULL截断漏洞，导致了正则过滤被绕过,所以可以使用%00截断正则匹配，发现文章中例子跟这道题目用的函数基本一致<br><img src="http://i1.fuimg.com/693893/91b62289710775fb.png" alt="例子"><br>也就是说nctf变量必须是数字，当遇到%00(NULL)时，函数就截止了。</p>
+<p>还有一个函数strpos() 函数查找 “php” 在字符串中第一次出现的位置：</p>
+<p>定义和用法<br>strpos() 函数查找字符串在另一字符串中第一次出现的位置。</p>
+<p>strpos() 函数对大小写敏感。<br>这在题目中就是strpos ($_GET[‘nctf’], ‘#biubiubiu’)函数要求nctf变量中需要包含’#biubiubiu’字符串，才能返回。</p>
+<p>了解完来试试<br>不会的函数还是问问度娘好使。。最终拿到flag<img src="http://i1.fuimg.com/693893/d9f4b07797d4f9dc.png" alt></p>
+<h2 id="web2：bypass-again"><a href="#web2：bypass-again" class="headerlink" title="web2：bypass again"></a>web2：bypass again</h2><p>点进去 发现好像还是代码审计<img src="http://i1.fuimg.com/693893/04b57bc1ef16ba15.png" alt><br>get一个变量 </p>
+<p>还有isset函数</p>
+<p>定义和用法<br>isset() 函数用于检测变量是否已设置并且非 NULL。</p>
+<p>如果已经使用 unset() 释放了一个变量之后，再通过 isset() 判断将返回 FALSE。</p>
+<p>若使用 isset() 测试一个被设置成 NULL 的变量，将返回 FALSE。</p>
+<p>同时要注意的是 null 字符（”\0”）并不等同于 PHP 的 NULL 常量。这里应该是设置isset检测ab不为空</p>
+<p>再看发现代码的意思是让两个不一样的数使他们的md5相等，md5()函数要求接收一个字符串，若传递进去一个数组，则会返回null（加了‘ ’就相当于字符串的代表了）</p>
+<p>因此向$_GET数组传入两个名为a、b的不相等的数组，从而导致md5()均返回空输出信息 退出脚本。<br>这种题前面有类似，考察md5碰撞，只要md5值开头为0ed， ==会认为两边都为0，即为true这样就好弄了根据前面的题a=240610708&amp;b=QNKCDZO 还可以?a[]=&amp;b[]=1 这样比较简单 这是因为md5不能处理数组结构的数据。出错返回的空NULL==NULL</p>
+<p><img src="http://i1.fuimg.com/693893/d9f8fd56f1227da9.png" alt></p>
+<h2 id="web3-变量覆盖"><a href="#web3-变量覆盖" class="headerlink" title="web3:变量覆盖"></a>web3:变量覆盖</h2><p> 看到一个输入框，难不成是XSS或者SQL注入的类型题目吗<br><img src="http://i1.fuimg.com/693893/8c209c9ab8420ffb.png" alt><br>题目说是变量覆盖  先找到相关的看看基础知识。<br>原来还是代码审计的相关知识里面的<br><a href="https://www.freebuf.com/column/150731.html" target="_blank" rel="noopener">代码审计|变量覆盖漏洞</a></p>
+<p><a href="https://www.cnblogs.com/sqyysec/p/6926095.html" target="_blank" rel="noopener">【代码审计】变量覆盖漏洞详解</a></p>
+<p>那之后来干一波。<br>映入眼帘的 还是一大波代码<img src="http://i1.fuimg.com/693893/a8eb99c945280578.png" alt>果然还是代码审计</p>
+<p><img src="http://i1.fuimg.com/693893/3f88edf4e736e0dc.png" alt>$password 等于$thepassword_123就能够得到flag了<br>这样构造一下得到flag<br><img src="http://i1.fuimg.com/693893/5206a723af3c59de.png" alt></p>
+<h2 id="web4-php是世界上最好的语言"><a href="#web4-php是世界上最好的语言" class="headerlink" title="web4:php是世界上最好的语言"></a>web4:php是世界上最好的语言</h2><p>好像题目崩了 <img src="http://i1.fuimg.com/693893/b3d2c6dae1df094b.png" alt><br>等等看再写。</p>
+<h2 id="web-5伪装者"><a href="#web-5伪装者" class="headerlink" title="web:5伪装者"></a>web:5伪装者</h2><p><img src="http://i1.fuimg.com/693893/e21a13b9809d64ff.png" alt><br>告诉我不是本地登录 然后只有本地  题目又是伪装者 看来是伪造IP 应该可以抓包改包 来过 可是burp暂时不能用， 试试火狐的软件</p>
+<p><img src="http://i1.fuimg.com/693893/f6c12b0df1b767f3.png" alt><br>  。。。不知道为啥 这样保存后不让用，，，暂时没了思路 等正好burp再来战。这样伪造应该也是可行的。</p>
+<h2 id="web6-SQL注入1"><a href="#web6-SQL注入1" class="headerlink" title="web6:SQL注入1"></a>web6:SQL注入1</h2><p><img src="http://i1.fuimg.com/693893/11e999cb16809470.png" alt><br>点进去 看账号密码都有提交白 看看有啥信息<br>Secure Web Login<br>You are not admin!</p>
+<p>告诉我不是admin  那就再点开Source<br><img src="http://i1.fuimg.com/693893/0e2b6a23656d68ea.png" alt><br>看到重点  <img src="http://i1.fuimg.com/693893/dbfd015dabbaab3d.png" alt><br>不是说好的注入吗  突然有了审计的味道。</p>
+<p>1框说明 user 是 admin，所以要想办法避免密码的验证</p>
+<p>在2中：$sql=”select user from ctf where (user=’”.$user.”‘) and (pw=’”.$pass.”‘)”</p>
+<p>我们通过审计发现注入点    在(user=’”.$user.”‘)做手脚，在Username处输入 admin’)#</p>
+<p>输入 admin’）# </p>
+<p>因为后面的语句被#注释了，要把源码原来的）补上。<br><img src="http://i1.fuimg.com/693893/31d785d8affbfbea.png" alt></p>
+<h2 id="web7-pass-check"><a href="#web7-pass-check" class="headerlink" title="web7: pass check"></a>web7: pass check</h2><p>打开就是源码<br><img src="http://i1.fuimg.com/693893/5c041ed4c3c285e6.png" alt></p>
+<p>看源码只要(!strcmp($pass,$pass1))条件成立就可得到flag。</p>
+<p>strcmp()是用于比较字符串的函数</p>
+<p>定义：</p>
+<p>int strcmp ( string $str1 , string $str2 )<br>参数 str1第一个字符串。str2第二个字符串。<br>如果 str1 小于 str2 返回 &lt; 0；<br>如果 str1 大于 str2 返回 &gt; 0；<br>如果两者相等，返回 0。</p>
+<p>因此尝试数组绕过,只要我们$_POST[‘pass’]是一个数组或者一个对象就搞定了。<br><img src="http://i1.fuimg.com/693893/fee8114e4af43cfd.png" alt></p>
+<h2 id="web8-起名字真难"><a href="#web8-起名字真难" class="headerlink" title="web8:起名字真难"></a>web8:起名字真难</h2><p> 。。题目挺有意思 不过起名字确实很难<br><img src="http://i1.fuimg.com/693893/1fe287cb034968ac.png" alt><br>看看代码 nother_says_correct 没有其他精确的方法？/?…先往下看 百度这个给了我一个是数字验证正则绕过的类型题目，继续看 题目告诉我们是 输入key，key的值需要等于54975581388，但是key的每一位数字不能是1-9</p>
+<p>ord()函数返回字符串的首个字符的 ASCII 值。</p>
+<p>不让输入数字还让等于54975581388  这进制转化白 转化成16进制0xccccccccc<br><img src="http://i1.fuimg.com/693893/1c10115b268a73e1.png" alt><br>得到flag</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p> 暂时做到这，对代码审计又有了进一步的认识。</p>
 
             </div>
             <hr>
@@ -595,7 +603,7 @@
                     </span>
                     <a href="https://Greypotato.github.io" class="b-link-green">Greypotato</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/07/21/SQLLX/" class="b-link-green">SQL靶场练习</a>
+                    <a href="/2019/07/26/web2/" class="b-link-green">南邮CTF web练习</a>
                 </p>
             </div>
         </div>
@@ -618,7 +626,8 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/07/26/web2/">
                     <div class="card-image">
@@ -634,9 +643,9 @@
 web1：/0xx
 点开题目链接后发现是代码审计</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-26
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-26
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -645,6 +654,7 @@ web1：/0xx
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -663,23 +673,22 @@ web1：/0xx
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/07/19/NYWEB/">
+                <a href="/2019/07/21/SQLLX/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="南邮CTF-WEB-writeup">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="SQL靶场练习">
                         
-                        <span class="card-title">南邮CTF-WEB-writeup</span>
+                        <span class="card-title">SQL靶场练习</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">WEB题签到题  打开界面看到：key在哪里？ 签到题都不会很难，查看源代码。
-
-md5 collision 首先还是先看看题
-题目提示给出了MD5 中间又有 md51=md52 看到前面有QNKCDZO 那么很显然啊 就是找到和‘QNKC</div>
+                    <div class="summary">前言 之前进行了SQL注入的学习，这里找到安全龙的实验室进行一波小小的练习。
+第一关首先进行注入点测试。
+一般来说先加一个单引号(英文)，来判断这里地址栏自动转化了URL编码输入“   ?id=1’  ”，回显为  “1” limit 0,</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-19
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-07-21
                             </span>
                         <span class="publish-author">
                             
@@ -692,8 +701,8 @@ md5 collision 首先还是先看看题
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/web练习（一）/" target="_blank">
-                        <span class="chip bg-color">web练习（一）</span>
+                    <a href="/tags/SQL二）/" target="_blank">
+                        <span class="chip bg-color">SQL二）</span>
                     </a>
                     
                 </div>
